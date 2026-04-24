@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "dgSpecHash": "lotbLrh18vk=",
+  "success": true,
+  "projectFilePath": "/Users/dhanushkeloth/presidio_genspark_training/bus_booking_system/BusBookingAPI/BusBookingAPI.csproj",
+  "expectedPackageFiles": [
+    "/Users/dhanushkeloth/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/8.0.14/microsoft.aspnetcore.authentication.jwtbearer.8.0.14.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/microsoft.entityframeworkcore/8.0.14/microsoft.entityframeworkcore.8.0.14.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.14/microsoft.entityframeworkcore.abstractions.8.0.14.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/microsoft.entityframeworkcore.analyzers/8.0.14/microsoft.entityframeworkcore.analyzers.8.0.14.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/microsoft.entityframeworkcore.relational/8.0.11/microsoft.entityframeworkcore.relational.8.0.11.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/microsoft.identitymodel.abstractions/7.1.2/microsoft.identitymodel.abstractions.7.1.2.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/microsoft.identitymodel.jsonwebtokens/7.1.2/microsoft.identitymodel.jsonwebtokens.7.1.2.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/microsoft.identitymodel.logging/7.1.2/microsoft.identitymodel.logging.7.1.2.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/microsoft.identitymodel.protocols/7.1.2/microsoft.identitymodel.protocols.7.1.2.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/7.1.2/microsoft.identitymodel.protocols.openidconnect.7.1.2.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/microsoft.identitymodel.tokens/7.1.2/microsoft.identitymodel.tokens.7.1.2.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/microsoft.openapi/1.6.14/microsoft.openapi.1.6.14.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/npgsql/8.0.6/npgsql.8.0.6.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/npgsql.entityframeworkcore.postgresql/8.0.11/npgsql.entityframeworkcore.postgresql.8.0.11.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/swashbuckle.aspnetcore/6.9.0/swashbuckle.aspnetcore.6.9.0.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/swashbuckle.aspnetcore.swagger/6.9.0/swashbuckle.aspnetcore.swagger.6.9.0.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.9.0/swashbuckle.aspnetcore.swaggergen.6.9.0.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.9.0/swashbuckle.aspnetcore.swaggerui.6.9.0.nupkg.sha512",
+    "/Users/dhanushkeloth/.nuget/packages/system.identitymodel.tokens.jwt/7.1.2/system.identitymodel.tokens.jwt.7.1.2.nupkg.sha512"
+  ],
+  "logs": []
+}
