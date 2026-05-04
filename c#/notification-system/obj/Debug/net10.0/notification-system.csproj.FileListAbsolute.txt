@@ -1,0 +1,15 @@
+/Users/dhanushkeloth/presidio_genspark_training/c#/notification-system/obj/Debug/net10.0/notification-system.GeneratedMSBuildEditorConfig.editorconfig
+/Users/dhanushkeloth/presidio_genspark_training/c#/notification-system/obj/Debug/net10.0/notification-system.AssemblyInfoInputs.cache
+/Users/dhanushkeloth/presidio_genspark_training/c#/notification-system/obj/Debug/net10.0/notification-system.AssemblyInfo.cs
+/Users/dhanushkeloth/presidio_genspark_training/c#/notification-system/obj/Debug/net10.0/notification-system.csproj.CoreCompileInputs.cache
+/Users/dhanushkeloth/presidio_genspark_training/c#/notification-system/obj/Debug/net10.0/notification-system.sourcelink.json
+/Users/dhanushkeloth/presidio_genspark_training/c#/notification-system/bin/Debug/net10.0/notification-system
+/Users/dhanushkeloth/presidio_genspark_training/c#/notification-system/bin/Debug/net10.0/notification-system.deps.json
+/Users/dhanushkeloth/presidio_genspark_training/c#/notification-system/bin/Debug/net10.0/notification-system.runtimeconfig.json
+/Users/dhanushkeloth/presidio_genspark_training/c#/notification-system/bin/Debug/net10.0/notification-system.dll
+/Users/dhanushkeloth/presidio_genspark_training/c#/notification-system/bin/Debug/net10.0/notification-system.pdb
+/Users/dhanushkeloth/presidio_genspark_training/c#/notification-system/obj/Debug/net10.0/notification-system.dll
+/Users/dhanushkeloth/presidio_genspark_training/c#/notification-system/obj/Debug/net10.0/refint/notification-system.dll
+/Users/dhanushkeloth/presidio_genspark_training/c#/notification-system/obj/Debug/net10.0/notification-system.pdb
+/Users/dhanushkeloth/presidio_genspark_training/c#/notification-system/obj/Debug/net10.0/notification-system.genruntimeconfig.cache
+/Users/dhanushkeloth/presidio_genspark_training/c#/notification-system/obj/Debug/net10.0/ref/notification-system.dll
