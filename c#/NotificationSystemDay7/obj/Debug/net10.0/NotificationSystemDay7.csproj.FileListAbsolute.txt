@@ -1,0 +1,15 @@
+/Users/dhanushkeloth/presidio_genspark_training/c#/NotificationSystemDay7/bin/Debug/net10.0/NotificationSystemDay7
+/Users/dhanushkeloth/presidio_genspark_training/c#/NotificationSystemDay7/bin/Debug/net10.0/NotificationSystemDay7.deps.json
+/Users/dhanushkeloth/presidio_genspark_training/c#/NotificationSystemDay7/bin/Debug/net10.0/NotificationSystemDay7.runtimeconfig.json
+/Users/dhanushkeloth/presidio_genspark_training/c#/NotificationSystemDay7/bin/Debug/net10.0/NotificationSystemDay7.dll
+/Users/dhanushkeloth/presidio_genspark_training/c#/NotificationSystemDay7/bin/Debug/net10.0/NotificationSystemDay7.pdb
+/Users/dhanushkeloth/presidio_genspark_training/c#/NotificationSystemDay7/obj/Debug/net10.0/NotificationSystemDay7.GeneratedMSBuildEditorConfig.editorconfig
+/Users/dhanushkeloth/presidio_genspark_training/c#/NotificationSystemDay7/obj/Debug/net10.0/NotificationSystemDay7.AssemblyInfoInputs.cache
+/Users/dhanushkeloth/presidio_genspark_training/c#/NotificationSystemDay7/obj/Debug/net10.0/NotificationSystemDay7.AssemblyInfo.cs
+/Users/dhanushkeloth/presidio_genspark_training/c#/NotificationSystemDay7/obj/Debug/net10.0/NotificationSystemDay7.csproj.CoreCompileInputs.cache
+/Users/dhanushkeloth/presidio_genspark_training/c#/NotificationSystemDay7/obj/Debug/net10.0/NotificationSystemDay7.sourcelink.json
+/Users/dhanushkeloth/presidio_genspark_training/c#/NotificationSystemDay7/obj/Debug/net10.0/NotificationSystemDay7.dll
+/Users/dhanushkeloth/presidio_genspark_training/c#/NotificationSystemDay7/obj/Debug/net10.0/refint/NotificationSystemDay7.dll
+/Users/dhanushkeloth/presidio_genspark_training/c#/NotificationSystemDay7/obj/Debug/net10.0/NotificationSystemDay7.pdb
+/Users/dhanushkeloth/presidio_genspark_training/c#/NotificationSystemDay7/obj/Debug/net10.0/NotificationSystemDay7.genruntimeconfig.cache
+/Users/dhanushkeloth/presidio_genspark_training/c#/NotificationSystemDay7/obj/Debug/net10.0/ref/NotificationSystemDay7.dll
