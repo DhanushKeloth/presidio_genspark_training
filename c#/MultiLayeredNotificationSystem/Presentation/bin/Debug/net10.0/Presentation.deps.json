@@ -1,0 +1,111 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "Presentation/1.0.0": {
+        "dependencies": {
+          "BusinessLayer": "1.0.0",
+          "DataAccessLayer": "1.0.0",
+          "Interfaces": "1.0.0",
+          "Models": "1.0.0",
+          "NotificationSenders": "1.0.0"
+        },
+        "runtime": {
+          "Presentation.dll": {}
+        }
+      },
+      "BusinessLayer/1.0.0": {
+        "dependencies": {
+          "DataAccessLayer": "1.0.0",
+          "Interfaces": "1.0.0",
+          "Models": "1.0.0"
+        },
+        "runtime": {
+          "BusinessLayer.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "DataAccessLayer/1.0.0": {
+        "dependencies": {
+          "Interfaces": "1.0.0",
+          "Models": "1.0.0"
+        },
+        "runtime": {
+          "DataAccessLayer.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Interfaces/1.0.0": {
+        "dependencies": {
+          "Models": "1.0.0"
+        },
+        "runtime": {
+          "Interfaces.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Models/1.0.0": {
+        "runtime": {
+          "Models.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "NotificationSenders/1.0.0": {
+        "dependencies": {
+          "Interfaces": "1.0.0",
+          "Models": "1.0.0"
+        },
+        "runtime": {
+          "NotificationSenders.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Presentation/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BusinessLayer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DataAccessLayer/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Interfaces/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Models/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "NotificationSenders/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
