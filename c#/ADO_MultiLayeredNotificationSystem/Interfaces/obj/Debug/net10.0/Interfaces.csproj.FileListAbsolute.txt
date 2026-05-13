@@ -1,0 +1,16 @@
+/Users/dhanushkeloth/presidio_genspark_training/c#/MultiLayeredNotificationSystem/Interfaces/bin/Debug/net10.0/Interfaces.deps.json
+/Users/dhanushkeloth/presidio_genspark_training/c#/MultiLayeredNotificationSystem/Interfaces/bin/Debug/net10.0/Interfaces.dll
+/Users/dhanushkeloth/presidio_genspark_training/c#/MultiLayeredNotificationSystem/Interfaces/bin/Debug/net10.0/Interfaces.pdb
+/Users/dhanushkeloth/presidio_genspark_training/c#/MultiLayeredNotificationSystem/Interfaces/bin/Debug/net10.0/Models.dll
+/Users/dhanushkeloth/presidio_genspark_training/c#/MultiLayeredNotificationSystem/Interfaces/bin/Debug/net10.0/Models.pdb
+/Users/dhanushkeloth/presidio_genspark_training/c#/MultiLayeredNotificationSystem/Interfaces/obj/Debug/net10.0/Interfaces.csproj.AssemblyReference.cache
+/Users/dhanushkeloth/presidio_genspark_training/c#/MultiLayeredNotificationSystem/Interfaces/obj/Debug/net10.0/Interfaces.GeneratedMSBuildEditorConfig.editorconfig
+/Users/dhanushkeloth/presidio_genspark_training/c#/MultiLayeredNotificationSystem/Interfaces/obj/Debug/net10.0/Interfaces.AssemblyInfoInputs.cache
+/Users/dhanushkeloth/presidio_genspark_training/c#/MultiLayeredNotificationSystem/Interfaces/obj/Debug/net10.0/Interfaces.AssemblyInfo.cs
+/Users/dhanushkeloth/presidio_genspark_training/c#/MultiLayeredNotificationSystem/Interfaces/obj/Debug/net10.0/Interfaces.csproj.CoreCompileInputs.cache
+/Users/dhanushkeloth/presidio_genspark_training/c#/MultiLayeredNotificationSystem/Interfaces/obj/Debug/net10.0/Interfaces.sourcelink.json
+/Users/dhanushkeloth/presidio_genspark_training/c#/MultiLayeredNotificationSystem/Interfaces/obj/Debug/net10.0/Interfaces.csproj.Up2Date
+/Users/dhanushkeloth/presidio_genspark_training/c#/MultiLayeredNotificationSystem/Interfaces/obj/Debug/net10.0/Interfaces.dll
+/Users/dhanushkeloth/presidio_genspark_training/c#/MultiLayeredNotificationSystem/Interfaces/obj/Debug/net10.0/refint/Interfaces.dll
+/Users/dhanushkeloth/presidio_genspark_training/c#/MultiLayeredNotificationSystem/Interfaces/obj/Debug/net10.0/Interfaces.pdb
+/Users/dhanushkeloth/presidio_genspark_training/c#/MultiLayeredNotificationSystem/Interfaces/obj/Debug/net10.0/ref/Interfaces.dll
