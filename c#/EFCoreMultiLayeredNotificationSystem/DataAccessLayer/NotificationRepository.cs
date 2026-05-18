@@ -22,7 +22,7 @@ namespace DataAccessLayer
             {
                 _context.Set<T>().Add(item);
                 _context.SaveChanges();
-                Console.WriteLine("inserted notification ");
+                Console.WriteLine("inserted notification into database");
             }
             catch(Exception ex)
             {
