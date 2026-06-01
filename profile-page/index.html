@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>profile page</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body>
+    <nav class="floating-navbar">
+      <ul>
+        <li class="active"><a href="#hero">Home</a></li>
+        <!-- <li><a href="#about">About</a></li> -->
+        <li><a href="#skills">Skills</a></li>
+        <!-- <li><a href="#experience">Experience</a></li> -->
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li class="contact-btn">
+          <a href="#contact">Contact</a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-left">
+        <p class="greeting">Hi, I'm</p>
+
+        <h1 class="hero-title">Dhanush <span>K</span></h1>
+
+        <h2 class="hero-role">Full Stack Developer</h2>
+
+        <p class="hero-description">
+          I build scalable web applications, real-time systems and developer
+          tools that solve real-world problems.
+        </p>
+
+        <div class="hero-buttons">
+          <!-- <a href="#projects" class="btn-primary"> View Projects </a> -->
+        </div>
+
+        <!-- <div class="social-links">
+          <a href="#">
+            <i class="fab fa-github"></i>
+          </a>
+
+          <a href="#">
+            <i class="fab fa-linkedin"></i>
+          </a>
+
+          <a href="#">
+            <i class="fab fa-twitter"></i>
+          </a>
+
+          <a href="#">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div> -->
+      </div>
+
+      <div class="hero-right">
+        <div class="profile-wrapper">
+          <img src="./profile-image.png" alt="Profile" class="profile-image" />
+        </div>
+      </div>
+    </section>
+
+    <section id="about"></section>
+    <section class="skills-section" id="skills">
+      <div class="section-header">
+        <p class="section-tag">MY SKILLS</p>
+        <h2>Technologies I Work With</h2>
+      </div>
+
+      <div class="skills-grid">
+        <div class="skill-card">
+          <h3>Frontend</h3>
+
+          <div class="skill-items">
+            <span>React</span>
+            <span>Angular</span>
+            <span>JavaScript</span>
+            <span>TypeScript</span>
+            <span>HTML5</span>
+            <span>CSS3</span>
+            <span>Tailwind CSS</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Backend</h3>
+
+          <div class="skill-items">
+            <span>Node.js</span>
+            <span>Express.js</span>
+            <span>ASP.NET Core</span>
+            <span>C#</span>
+            <span>REST APIs</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Database</h3>
+
+          <div class="skill-items">
+            <span>PostgreSQL</span>
+            <span>MongoDB</span>
+            <span>Firebase</span>
+            <span>MySQL</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Cloud & DevOps</h3>
+
+          <div class="skill-items">
+            <span>Azure</span>
+            <span>Docker</span>
+            <span>NGINX</span>
+            <span>Linux</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Tools</h3>
+
+          <div class="skill-items">
+            <span>Git</span>
+            <span>GitHub</span>
+            <span>VS Code</span>
+            <span>Postman</span>
+            <span>Figma</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="experience"></section>
+    <section id="projects">
+      <div class="section-header">
+        <p class="section-tag">PROJECTS</p>
+        <h2>Things I've Built</h2>
+        <p class="section-subtitle">
+          A collection of projects focused on real-time systems, collaboration
+          tools, and cloud-native applications.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+
+        <div class="project-card">
+          <span class="project-number">01</span>
+
+          <h3>CodeSharePro</h3>
+
+          <h4>Real-Time Collaborative Code Editor</h4>
+
+          <p>
+            A collaborative coding platform with shared and private workspaces,
+            live synchronization, role-based access, and real-time
+            communication.
+          </p>
+
+          <div class="tech-stack">
+            <span>React</span>
+            <span>Node.js</span>
+            <span>Socket.IO</span>
+            <span>MongoDB</span>
+          </div>
+
+          <a href="#" class="project-link"> View Project → </a>
+        </div>
+        <!-- Project 3 -->
+
+        <div class="project-card">
+          <span class="project-number">02</span>
+
+          <h3>Offline Chat System</h3>
+
+          <h4>LAN Communication Tool</h4>
+
+          <p>
+            Offline communication system supporting peer discovery, connection
+            approval, file transfer and messaging over LAN and WLAN networks.
+          </p>
+
+          <div class="tech-stack">
+            <span>Node.js</span>
+            <span>TCP</span>
+            <span>LAN</span>
+            <span>Socket Programming</span>
+          </div>
+
+          <a href="#" class="project-link"> View Project → </a>
+        </div>
+
+        <!-- Project 4 -->
+
+        <div class="project-card">
+          <span class="project-number">03</span>
+
+          <h3>Hostel Management System</h3>
+
+          <h4>Student Accommodation Portal</h4>
+
+          <p>
+            A web-based management system for handling student accommodation,
+            room allocation, complaints, and payment tracking.
+          </p>
+
+          <div class="tech-stack">
+            <span>React</span>
+            <span>Firebase</span>
+            <span>Material UI</span>
+            <span>JavaScript</span>
+          </div>
+
+          <a href="#" class="project-link"> View Project → </a>
+        </div>
+      </div>
+    </section>
+    <section id="education">
+      <div class="section-header">
+        <p class="section-tag">EDUCATION</p>
+        <h2>My Academic Journey</h2>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+
+          <div class="timeline-content">
+            <span class="timeline-year"> 2023-2026 </span>
+
+            <h3>Bachelor of Technology</h3>
+
+            <h4>Computer Science & Engineering</h4>
+
+            <p>JNTUH University College of Engineering</p>
+
+            <p class="highlight">CGPA: 8.9 / 10</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+
+          <div class="timeline-content">
+            <span class="timeline-year"> 2020 - 2023 </span>
+
+            <h3>Diploma in Computer Engineering</h3>
+
+            <p>Government Polytechnic Hyderabad</p>
+
+            <p class="highlight">CGPA: 9.1 / 10</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+
+          <div class="timeline-content">
+            <span class="timeline-year"> 2015 - 2020 </span>
+
+            <h3>Secondary Education</h3>
+
+            <p>Anna Memorial High School</p>
+
+            <p class="highlight">CGPA: 10 / 10</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="contact">
+      <div class="contact-container">
+        <p class="section-tag">CONTACT</p>
+
+        <h2>Let's Build Something Together</h2>
+
+        <p class="contact-description">
+          Have a project in mind or simply want to connect? Feel free to reach
+          out through any of the platforms below.
+        </p>
+
+        <div class="contact-info">
+          <div class="info-item">
+            <span>Email</span>
+            <p>dhanush@example.com</p>
+          </div>
+
+          <div class="info-item">
+            <span>Phone</span>
+            <p>+91 XXXXX XXXXX</p>
+          </div>
+
+          <div class="info-item">
+            <span>Location</span>
+            <p>India</p>
+          </div>
+        </div>
+
+        <div class="contact-socials">
+          <a
+            href="https://github.com/DhanushKeloth"
+            target="_blank"
+            aria-label="Github"
+          >
+            <i class="fab fa-github"></i>
+          </a>
+
+          <a
+            href="https://linkedin.com/in/yourusername"
+            target="_blank"
+            aria-label="LinkedIn"
+          >
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+
+          <a
+            href="https://twitter.com/yourusername"
+            target="_blank"
+            aria-label="Twitter"
+          >
+            <i class="fab fa-twitter"></i>
+          </a>
+
+          <a href="mailto:dhanush@example.com" aria-label="Email">
+            <i class="fas fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
