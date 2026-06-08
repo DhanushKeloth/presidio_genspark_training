@@ -1,0 +1,233 @@
+<div class="register-page">
+
+  <!-- LEFT SECTION -->
+  <div class="left-section">
+
+    <div class="logo">
+      <div class="logo-icon">
+        🚚
+      </div>
+      <span>FastShip</span>
+    </div>
+
+    <div class="hero-content">
+
+      <h1>
+        Start Shipping <br>
+        Smarter.
+      </h1>
+
+      <p class="hero-description">
+        The most reliable enterprise-grade logistics platform for all
+        your courier and shipment needs.
+      </p>
+
+      <div class="feature-list">
+
+        <div class="feature-item">
+          <div class="feature-icon">📍</div>
+          <div>
+            <h3>Real-Time Shipment Tracking</h3>
+            <p>Monitor your fleet and packages with pinpoint accuracy.</p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">🔒</div>
+          <div>
+            <h3>Secure OTP Verification</h3>
+            <p>
+              Ensure secure handoffs with multi-factor delivery
+              confirmation.
+            </p>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <div class="feature-icon">⚡</div>
+          <div>
+            <h3>Fast & Reliable Deliveries</h3>
+            <p>Optimized routing for enterprise-scale dispatch.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- RIGHT SECTION -->
+  <div class="right-section">
+
+    <div class="register-card">
+
+      <h2>Create Account</h2>
+
+      <p class="subtitle">
+        Enter your details to get started with FastShip.
+      </p>
+
+      <form
+        #registerForm="ngForm"
+        (ngSubmit)="onSubmit(registerForm)"
+      >
+
+        <!-- FULL NAME -->
+        <div class="form-group">
+          <label>Full Name</label>
+
+          <input
+            type="text"
+            name="fullName"
+            [(ngModel)]="model.fullName"
+            placeholder="John Doe"
+            required
+          >
+        </div>
+
+        <!-- EMAIL -->
+        <div class="form-group">
+          <label>Email Address</label>
+
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="model.email"
+            placeholder="john@example.com"
+            required
+          >
+        </div>
+
+        <!-- PHONE ROW -->
+        <div class="row">
+
+          <div class="form-group">
+            <label>Phone Number</label>
+
+            <input
+              type="tel"
+              name="phoneNumber"
+              [(ngModel)]="model.phoneNumber"
+              placeholder="+91 9876543210"
+            >
+          </div>
+
+          <div class="form-group">
+            <label>Alternate Phone Number</label>
+
+            <input
+              type="tel"
+              name="alternatePhoneNumber"
+              [(ngModel)]="model.alternatePhoneNumber"
+              placeholder="+91 9876543210"
+            >
+          </div>
+
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="form-group">
+          <label>Password</label>
+
+          <div class="password-container">
+
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              name="password"
+              [(ngModel)]="model.password"
+              minlength="8"
+              required
+              placeholder="Enter password"
+            >
+
+            <button
+              type="button"
+              class="eye-btn"
+              (click)="togglePassword()"
+            >
+              {{ showPassword ? '🙈' : '👁️' }}
+            </button>
+
+          </div>
+        </div>
+
+        <!-- CONFIRM PASSWORD -->
+        <div class="form-group">
+          <label>Confirm Password</label>
+
+          <div class="password-container">
+
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              name="confirmPassword"
+              [(ngModel)]="model.confirmPassword"
+              required
+              placeholder="Confirm password"
+            >
+
+            <button
+              type="button"
+              class="eye-btn"
+              (click)="togglePassword()"
+            >
+              {{ showPassword ? '🙈' : '👁️' }}
+            </button>
+
+          </div>
+        </div>
+
+        <!-- ERROR MESSAGE -->
+        <div
+          class="error-box"
+          *ngIf="(errorMessage$ | async) as error"
+        >
+          {{ error }}
+        </div>
+
+        <!-- TERMS -->
+        <div class="terms-row">
+
+          <input
+            type="checkbox"
+            name="terms"
+            ngModel
+            required
+          >
+
+          <span>
+            I agree to the
+            <a href="#">Terms & Conditions</a>
+            and
+            <a href="#">Privacy Policy</a>
+          </span>
+
+        </div>
+
+        <!-- SUBMIT BUTTON -->
+        <button
+          type="submit"
+          class="register-btn"
+          [disabled]="registerForm.invalid || (isLoading$ | async)"
+        >
+
+          {{
+            (isLoading$ | async)
+              ? 'Creating Account...'
+              : 'Create Account →'
+          }}
+
+        </button>
+
+      </form>
+
+      <div class="login-link">
+        Already have an account?
+        <a routerLink="/auth/login">Login here</a>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

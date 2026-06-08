@@ -17,6 +17,16 @@ using ShipmentTrackingAPI.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200") // Your Angular URL
+              .AllowAnyHeader()                     // Allows the Authorization Bearer token!
+              .AllowAnyMethod();                    // Allows POST, GET, PUT, DELETE
+    });
+});
+
 #region enums configuration
 var dataSourceBuilder = new NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("DefaultConnection"));
 var translator = new NpgsqlNullNameTranslator();
@@ -130,7 +140,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("AllowAngularApp");
 app.UseAuthentication();
 app.UseAuthorization();
 
