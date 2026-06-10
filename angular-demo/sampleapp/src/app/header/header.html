@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+  <div class="container">
+    
+    <a class="navbar-brand fw-bold" routerLink="/dashboard">🛒 SmartShop</a>
+
+    <div class="d-flex align-items-center">
+      
+      @if (user$ | async; as user) {
+        <span class="text-light me-3">
+          Hello, <strong>{{ user.firstName }}</strong>!
+        </span>
+        
+        <button class="btn btn-outline-light btn-sm" (click)="onLogout()">
+          Logout
+        </button>
+      }
+      
+    </div>
+
+  </div>
+</nav>

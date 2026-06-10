@@ -1,0 +1,78 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+      
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h3 class="card-title text-center mb-4">SmartShop Login</h3>
+          
+          <form (ngSubmit)="onSubmit()" >
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                id="username" 
+                placeholder="Enter username"
+                [(ngModel)]="loginModel.username"
+                name="username"
+                #usernameInput ="ngModel"
+                required
+                minlength="3"
+                >
+                @if (usernameInput.invalid&&usernameInput.touched) {
+                    <div class="alert-danger text-danger">
+                        @if (usernameInput.errors?.['required']) {
+                            <small>Username is required</small>
+                        }
+                        @if (usernameInput.errors?.['minlength']) {
+                            <small>minimum 3 characters required</small>
+                        }
+                    </div>
+                }
+            </div>
+
+            <!-- Password Input -->
+            <div class="mb-4">
+              <label for="password" class="form-label">Password</label>
+              <input 
+                type="password" 
+                class="form-control" 
+                id="password" 
+                placeholder="Enter password"
+                [(ngModel)]="loginModel.password"
+                name="password"
+                #passwordInput ="ngModel"
+                required
+                minlength="3"
+                >
+                 @if (passwordInput.invalid&&passwordInput.touched) {
+                    <div class="aler text-danger">
+                        @if (passwordInput.errors?.['required']) {
+                            <small>password is required</small>
+                        }
+                        @if (passwordInput.errors?.['minlength']) {
+                            <small>minimum 3 characters required</small>
+                        }
+                    </div>
+                }
+            </div>
+
+            <!-- Error Message Placeholder (Hidden by default) -->
+            <div class="alert alert-danger d-none" role="alert">
+              Invalid credentials. Please try again.
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100" >
+              Login
+            </button>
+        </form>
+       
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

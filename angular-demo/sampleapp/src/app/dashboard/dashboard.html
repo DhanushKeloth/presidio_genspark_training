@@ -1,0 +1,27 @@
+@if (user$ | async; as user) {
+
+  <div class="dashboard-container">
+
+    <h1>Welcome, {{ user.firstName }}!</h1>
+
+    <p>
+      You have successfully logged in to SmartShop Portal.
+    </p>
+
+    <div class="menu">
+
+      <a routerLink="/products" class="menu-card">
+        <h3>Products</h3>
+        <p>Browse all available products</p>
+      </a>
+
+      <a routerLink="/profile" class="menu-card">
+        <h3>Profile</h3>
+        <p>View your profile information</p>
+      </a>
+
+    </div>
+
+  </div>
+
+}

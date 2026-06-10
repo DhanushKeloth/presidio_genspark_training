@@ -1,0 +1,92 @@
+<div class="container mt-4">
+
+  @if (product$ | async; as product) {
+
+    <div class="card shadow">
+
+      <div class="row g-0">
+
+        <div class="col-md-5">
+
+          <img
+            [src]="product.thumbnail"
+            [alt]="product.title"
+            class="img-fluid rounded-start">
+
+        </div>
+
+        <div class="col-md-7">
+
+          <div class="card-body">
+
+            <h2>
+              {{ product.title }}
+            </h2>
+
+            <p class="text-muted">
+              {{ product.category }}
+            </p>
+
+            <hr>
+
+            <p>
+              <strong>Price:</strong>
+              ${{ product.price }}
+            </p>
+
+            <p>
+              <strong>Rating:</strong>
+              ⭐ {{ product.rating }}
+            </p>
+
+            <p>
+              <strong>Stock:</strong>
+              {{ product.stock }}
+            </p>
+
+            @if (product.brand) {
+
+              <p>
+                <strong>Brand:</strong>
+                {{ product.brand }}
+              </p>
+
+            }
+
+            <p>
+              <strong>Description:</strong>
+            </p>
+
+            <p>
+              {{ product.description }}
+            </p>
+
+            <a
+              routerLink="/products"
+              class="btn btn-secondary">
+
+              Back to Products
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  } @else {
+
+    <div class="text-center">
+
+      <div class="spinner-border"></div>
+
+      <p>Loading Product...</p>
+
+    </div>
+
+  }
+
+</div>
