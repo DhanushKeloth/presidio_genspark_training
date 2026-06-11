@@ -90,10 +90,10 @@ public class OtpService : IOtpService
 
         // Push code to the correct party — NOT to the driver, NOT to the group
         if (otpType == OtpType.Pickup)
-            await _tracking.PushOtpToSenderAsync(
+            await _tracking.PushOtpToSenderAsync(shipment.CustomerId,
                 shipment.TrackingNumber, code, expiresAt);
         else
-            await _tracking.PushOtpToRecipientAsync(
+            await _tracking.PushOtpToRecipientAsync(shipment.CustomerId,
                 shipment.TrackingNumber, code, expiresAt);
 
         return new OtpWindowDto
@@ -286,10 +286,10 @@ public class OtpService : IOtpService
 
         // Push new code to correct party
         if (otpType == OtpType.Pickup)
-            await _tracking.PushOtpToSenderAsync(
+            await _tracking.PushOtpToSenderAsync(shipment.CustomerId,
                 shipment.TrackingNumber, code, expiresAt);
         else
-            await _tracking.PushOtpToRecipientAsync(
+            await _tracking.PushOtpToRecipientAsync(shipment.CustomerId,
                 shipment.TrackingNumber, code, expiresAt);
 
         return new OtpWindowDto

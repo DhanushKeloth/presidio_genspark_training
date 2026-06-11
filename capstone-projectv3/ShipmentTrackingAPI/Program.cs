@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql;
 using Npgsql.NameTranslation;
+using ShipmentTrackingAPI.BackgroundServices;
 using ShipmentTrackingAPI.Data;
+using ShipmentTrackingAPI.Hubs;
 using ShipmentTrackingAPI.Interfaces;
 using ShipmentTrackingAPI.Middleware;
 using ShipmentTrackingAPI.Models;
@@ -21,9 +23,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp", policy =>
     {
-        policy.WithOrigins("http://localhost:4200") // Your Angular URL
+        policy.WithOrigins("http://localhost:4200","http://127.0.0.1:5500") // Your Angular URL
               .AllowAnyHeader()                     // Allows the Authorization Bearer token!
-              .AllowAnyMethod();                    // Allows POST, GET, PUT, DELETE
+              .AllowAnyMethod()
+              .AllowCredentials();                // Allows POST, GET, PUT, DELETE
     });
 });
 
@@ -40,7 +43,7 @@ dataSourceBuilder.MapEnum<OtpType>("otp_type", nameTranslator: translator);
 var dataSource = dataSourceBuilder.Build();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(dataSource, npgsqlOptions => 
+    options.UseNpgsql(dataSource, npgsqlOptions =>
     {
         npgsqlOptions.MapEnum<UserRole>("user_role", nameTranslator: translator);
         npgsqlOptions.MapEnum<DriverAccountStatus>("driver_account_status", nameTranslator: translator);
@@ -51,25 +54,25 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     }));
 
 
-// 2. Register the DbContext using the configured data source
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(dataSource));
 #endregion
 
 #region Dependency Injection (Repo & services)
-builder.Services.AddScoped<IUserRepository,UserRepository>();
-builder.Services.AddScoped<IDriverRepository,DriverRepository>();
-builder.Services.AddScoped<ICustomerRepository,CustomerRepository>();
-builder.Services.AddScoped<IShipmentRepository,ShipmentRepository>();
-builder.Services.AddScoped<IShipmentService,ShipmentService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IDriverRepository, DriverRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddScoped<IShipmentRepository, ShipmentRepository>();
 
-builder.Services.AddScoped<IOtpService,OtpService>();
+builder.Services.AddScoped<IShipmentService, ShipmentService>();
+
+builder.Services.AddScoped<IOtpService, OtpService>();
 builder.Services.AddSingleton<ITrackingService, TrackingService>();
-builder.Services.AddScoped<IAdminService,AdminService>();
-builder.Services.AddScoped<IDriverService,DriverService>();
-builder.Services.AddScoped<IPasswordHasher<User>,PasswordHasher<User>>();
-builder.Services.AddScoped<ICustomerService,CustomerService>();
-builder.Services.AddScoped<IAuthService,AuthService>();
+builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IDriverService, DriverService>();
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services.AddHostedService<GpsSimulationService>();
 #endregion
 
 
@@ -91,6 +94,22 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+    };
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            var accessToken = context.Request.Query["access_token"];
+            var path = context.HttpContext.Request.Path;
+            Console.WriteLine($"[SignalR Auth] Path={path}, TokenPresent={!string.IsNullOrEmpty(accessToken)}");
+
+            if (!string.IsNullOrEmpty(accessToken) &&
+                path.StartsWithSegments("/hubs/tracking"))
+            {
+                context.Token = accessToken;
+            }
+            return Task.CompletedTask;
+        }
     };
 });
 
@@ -145,5 +164,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.MapHub<TrackingHub>("/hubs/tracking");
 app.Run();

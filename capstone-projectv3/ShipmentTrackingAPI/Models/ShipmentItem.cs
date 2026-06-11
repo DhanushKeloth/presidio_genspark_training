@@ -33,15 +33,15 @@ public partial class ShipmentItem
 
     [Column("length_cm")]
     [Precision(6, 1)]
-    public decimal LengthCm { get; set; }
+    public decimal? LengthCm { get; set; }
 
     [Column("width_cm")]
     [Precision(6, 1)]
-    public decimal WidthCm { get; set; }
+    public decimal? WidthCm { get; set; }
 
     [Column("height_cm")]
     [Precision(6, 1)]
-    public decimal HeightCm { get; set; }
+    public decimal? HeightCm { get; set; }
 
     /// <summary>
     /// Count of identical units of this item in the shipment.

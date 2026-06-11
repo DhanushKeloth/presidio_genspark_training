@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
-using ShipmentTrackingAPI.Services.Interfaces;
+using ShipmentTrackingAPI.Hubs.DTOs;
+using ShipmentTrackingAPI.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -54,7 +55,7 @@ namespace ShipmentTrackingAPI.Hubs;
 ///   DeliveryOtpReceived  — sent to Recipient only
 /// </summary>
 [Authorize]
-public class TrackingHub : Hub
+public class TrackingHub : Hub<ITrackingClient>
 {
     private readonly ITrackingService _tracking;
     private readonly ILogger<TrackingHub> _logger;
@@ -64,7 +65,7 @@ public class TrackingHub : Hub
         ILogger<TrackingHub> logger)
     {
         _tracking = tracking;
-        _logger   = logger;
+        _logger = logger;
     }
 
     // ─────────────────────────────────────────────────────────
@@ -152,7 +153,10 @@ public class TrackingHub : Hub
             return;
         }
 
+
         var groupName = GroupName(trackingNumber);
+        Console.WriteLine($"[HUB] ConnectionId={Context.ConnectionId} joining group='{groupName}'");
+
         await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
 
         _logger.LogDebug(
@@ -161,11 +165,12 @@ public class TrackingHub : Hub
 
         // Acknowledge so the Angular client knows the join succeeded
         // and can start rendering the live tracking UI
-        await Clients.Caller.SendAsync("JoinedGroup", new
+        await Clients.Caller.StatusUpdated(new StatusUpdatedDto
         {
-            trackingNumber,
-            message   = "Joined tracking group.",
-            timestamp = DateTime.UtcNow
+            TrackingNumber = trackingNumber,
+            NewStatus = "Connected",
+            Description = "Joined tracking group. Live updates active.",
+            Timestamp = DateTime.UtcNow,
         });
     }
 

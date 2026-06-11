@@ -1,235 +1,251 @@
 using System.Collections.Concurrent;
 using Microsoft.AspNetCore.SignalR;
 using ShipmentTrackingAPI.Hubs;
-using ShipmentTrackingAPI.Services.Interfaces;
+using ShipmentTrackingAPI.Hubs.DTOs;
+using ShipmentTrackingAPI.Interfaces;   // ← matches ITrackingService namespace
 
 namespace ShipmentTrackingAPI.Services;
 
 /// <summary>
-/// Abstracts all SignalR communication so no other service ever directly
-/// references IHubContext or knows that SignalR exists.
+/// Central SignalR broadcast service.
 ///
-/// Two responsibilities:
+/// All server → client pushes in the system go through this class —
+/// GpsSimulationService and ShipmentService both call methods here.
+/// The hub itself only handles client → server calls
+/// (JoinShipmentGroup / LeaveShipmentGroup).
 ///
-///   1. Connection registry — a ConcurrentDictionary maps userId → connectionId.
-///      Populated by TrackingHub.OnConnectedAsync, cleared on disconnect.
-///      This is how OTP codes reach the correct browser tab without being
-///      broadcast to the entire group.
+/// RESPONSIBILITY SPLIT
+/// ────────────────────
+/// TrackingHub     : client → server  (Join/Leave group, connection lifecycle)
+/// TrackingService : server → client  (all broadcasts, all targeted OTP pushes)
 ///
-///   2. Event dispatch — every push to SignalR goes through a named method
-///      here. Each method name corresponds exactly to the Angular client-side
-///      event that the SignalR service subscribes to.
+/// USERID → CONNECTIONID MAPPING
+/// ──────────────────────────────
+/// OTP codes must be pushed to a specific browser tab, not the whole group.
+/// We maintain a ConcurrentDictionary<int, string> (userId → connectionId).
+/// Populated in TrackingHub.OnConnectedAsync, cleaned up in OnDisconnectedAsync.
 ///
-/// Thread safety:
-///   ConcurrentDictionary handles concurrent access from:
-///     - GpsSimulationService (background thread, every 5 seconds)
-///     - TrackingHub lifecycle callbacks (connection/disconnect events)
-///     - OtpService (HTTP request threads)
-///
-/// SignalR group naming: "shipment-{trackingNumber}"
-/// Example:              "shipment-TRK-A3X9B1"
+/// LIFETIME
+/// ────────
+/// Registered as a Singleton in Program.cs.
+/// IHubContext<T> is also a singleton — safe to inject directly.
+/// ConcurrentDictionary is thread-safe — no locks needed.
 /// </summary>
-public class TrackingService : ITrackingService
+public sealed class TrackingService : ITrackingService
 {
-    private readonly IHubContext<TrackingHub> _hub;
+    // ── userId → connectionId ─────────────────────────────────────────────────
+    // For capstone simplicity: one connectionId per user (latest tab wins).
+    // Production would use ConcurrentDictionary<int, HashSet<string>>.
+    private readonly ConcurrentDictionary<int, string> _connections      = new();
+    private readonly ConcurrentDictionary<string, int> _connectionToUser = new();
+
+    private readonly IHubContext<TrackingHub, ITrackingClient> _hub;
     private readonly ILogger<TrackingService> _logger;
 
-    // userId → connectionId
-    // Newest connection wins if a user opens multiple tabs.
-    private readonly ConcurrentDictionary<int, string> _connections = new();
-
-    // trackingNumber → (senderId, recipientId)
-    // Registered at booking time so OTP pushes avoid DB round-trips.
-    // recipientId = 0 when recipient is not a registered user.
-    private readonly ConcurrentDictionary<string, (int SenderId, int RecipientId)>
-        _shipmentParties = new();
-
     public TrackingService(
-        IHubContext<TrackingHub> hub,
+        IHubContext<TrackingHub, ITrackingClient> hub,
         ILogger<TrackingService> logger)
     {
         _hub    = hub;
         _logger = logger;
     }
 
-    // ─────────────────────────────────────────────────────────
-    //  CONNECTION REGISTRY
-    // ─────────────────────────────────────────────────────────
+    // ── Connection registry ──────────────────────────────────────────────────
 
     public void RegisterConnection(int userId, string connectionId)
     {
-        _connections[userId] = connectionId;
+        _connections[userId]          = connectionId;
+        _connectionToUser[connectionId] = userId;
+
         _logger.LogDebug(
-            "TrackingService: registered userId {UserId} → {ConnId}",
+            "TrackingService: registered userId={UserId} → connectionId={ConnId}",
             userId, connectionId);
     }
 
     public void RemoveConnection(string connectionId)
     {
-        var entry = _connections.FirstOrDefault(kv => kv.Value == connectionId);
-        if (entry.Key != 0)
+        if (_connectionToUser.TryRemove(connectionId, out var userId))
         {
-            _connections.TryRemove(entry.Key, out _);
+            // Only remove from _connections if this is still the current connectionId
+            // for that user — they may have already reconnected with a new one.
+            if (_connections.TryGetValue(userId, out var current) && current == connectionId)
+                _connections.TryRemove(userId, out _);
+
             _logger.LogDebug(
-                "TrackingService: removed connectionId {ConnId} for userId {UserId}",
-                connectionId, entry.Key);
+                "TrackingService: removed connectionId={ConnId} (userId={UserId})",
+                connectionId, userId);
         }
     }
 
-    /// <summary>
-    /// Registers Sender and Recipient user IDs for a shipment.
-    /// Called by ShipmentService.BookShipmentAsync so OTP pushes
-    /// can target the correct connection without a DB query.
-    /// </summary>
-    public void RegisterShipmentParties(
-        string trackingNumber,
-        int senderUserId,
-        int recipientUserId)
-        => _shipmentParties[trackingNumber] = (senderUserId, recipientUserId);
+    // ── Group broadcasts ─────────────────────────────────────────────────────
 
-    // ─────────────────────────────────────────────────────────
-    //  GROUP BROADCASTS
-    // ─────────────────────────────────────────────────────────
-
-    /// <summary>
-    /// GPS coordinate push — called by GpsSimulationService every 5 seconds.
-    /// Angular event: "LocationUpdated"
-    /// </summary>
     public async Task BroadcastLocationUpdateAsync(
         string trackingNumber,
         double lat,
         double lng)
-        => await _hub.Clients
-            .Group(Group(trackingNumber))
-            .SendAsync("LocationUpdated", new
+    {
+        await _hub.Clients
+            .Group(GroupName(trackingNumber))
+            .LocationUpdated(new LocationUpdatedDto
             {
-                trackingNumber,
-                latitude  = lat,
-                longitude = lng,
-                timestamp = DateTime.UtcNow
+                TrackingNumber = trackingNumber,
+                Latitude       = lat,
+                Longitude      = lng,
+                Timestamp      = DateTime.UtcNow,
             });
 
-    /// <summary>
-    /// Status change broadcast — called on every transition.
-    /// Angular event: "StatusUpdated"
-    /// </summary>
+        _logger.LogDebug(
+            "TrackingService: LocationUpdated → group={Group} ({Lat:F6}, {Lng:F6})",
+            GroupName(trackingNumber), lat, lng);
+    }
+
     public async Task BroadcastStatusUpdateAsync(
         string trackingNumber,
         string newStatus,
         string description)
-        => await _hub.Clients
-            .Group(Group(trackingNumber))
-            .SendAsync("StatusUpdated", new
+    {
+        Console.WriteLine($"[SERVICE] Broadcasting to group='{GroupName(trackingNumber)}'");
+
+        await _hub.Clients
+            .Group(GroupName(trackingNumber))
+            .StatusUpdated(new StatusUpdatedDto
             {
-                trackingNumber,
-                status      = newStatus,
-                description,
-                timestamp   = DateTime.UtcNow
+                TrackingNumber = trackingNumber,
+                NewStatus      = newStatus,
+                Description    = description,
+                Timestamp      = DateTime.UtcNow,
             });
 
-    /// <summary>
-    /// Driver reached destination — includes coordinates for map pin.
-    /// Angular event: "DriverArrived"
-    /// </summary>
+        _logger.LogInformation(
+            "TrackingService: StatusUpdated → group={Group}, status={Status}",
+            GroupName(trackingNumber), newStatus);
+    }
+
     public async Task BroadcastDriverArrivedAsync(
         string trackingNumber,
         double lat,
         double lng)
-        => await _hub.Clients
-            .Group(Group(trackingNumber))
-            .SendAsync("DriverArrived", new
+    {
+        await _hub.Clients
+            .Group(GroupName(trackingNumber))
+            .DriverArrived(new DriverArrivedDto
             {
-                trackingNumber,
-                driverLatitude  = lat,
-                driverLongitude = lng,
-                timestamp       = DateTime.UtcNow
+                TrackingNumber = trackingNumber,
+                Timestamp      = DateTime.UtcNow,
+                DriverLat      = lat,
+                DriverLng      = lng,
             });
 
-    /// <summary>
-    /// Final delivery confirmation — Angular clients leave group on receipt.
-    /// Cleans up the party registry — shipment lifecycle complete.
-    /// Angular event: "DeliverySuccess"
-    /// </summary>
+        _logger.LogInformation(
+            "TrackingService: DriverArrived → group={Group}",
+            GroupName(trackingNumber));
+    }
+
     public async Task BroadcastDeliverySuccessAsync(string trackingNumber)
     {
         await _hub.Clients
-            .Group(Group(trackingNumber))
-            .SendAsync("DeliverySuccess", new
+            .Group(GroupName(trackingNumber))
+            .ShipmentDelivered(new ShipmentDeliveredDto
             {
-                trackingNumber,
-                deliveredAt = DateTime.UtcNow
+                TrackingNumber = trackingNumber,
+                DeliveredAt    = DateTime.UtcNow,
             });
 
-        _shipmentParties.TryRemove(trackingNumber, out _);
+        _logger.LogInformation(
+            "TrackingService: ShipmentDelivered → group={Group}",
+            GroupName(trackingNumber));
     }
 
-    // ─────────────────────────────────────────────────────────
-    //  TARGETED PUSHES (one specific connection only)
-    // ─────────────────────────────────────────────────────────
+    public async Task BroadcastOtpRegeneratedAsync(
+        string trackingNumber,
+        string otpType,
+        DateTime expiresAt)
+    {
+        await _hub.Clients
+            .Group(GroupName(trackingNumber))
+            .OtpRegenerated(new OtpRegeneratedDto
+            {
+                OtpType        = otpType,
+                TrackingNumber = trackingNumber,
+                ExpiresAt      = expiresAt,
+            });
 
-    /// <summary>
-    /// Pickup OTP → Sender's browser tab only. Never to the group.
-    /// Driver cannot intercept this from any group channel.
-    /// Silent no-op if sender not currently connected.
-    /// Angular event: "PickupOtpReceived"
-    /// </summary>
+        _logger.LogInformation(
+            "TrackingService: OtpRegenerated → group={Group}, type={OtpType}",
+            GroupName(trackingNumber), otpType);
+    }
+
+    // ── Targeted OTP pushes ──────────────────────────────────────────────────
+
     public async Task PushOtpToSenderAsync(
-        string trackingNumber,
-        string otpCode,
+        int      senderUserId,
+        string   trackingNumber,
+        string   otpCode,
         DateTime expiresAt)
     {
-        if (!_shipmentParties.TryGetValue(trackingNumber, out var parties)) return;
-        if (!_connections.TryGetValue(parties.SenderId, out var connId))    return;
+        var connectionId = GetConnectionId(senderUserId);
+
+        if (connectionId is null)
+        {
+            _logger.LogWarning(
+                "TrackingService: PushOtpToSenderAsync — userId={UserId} not connected. " +
+                "Shipment={TrackingNumber}. SignalR push skipped.",
+                senderUserId, trackingNumber);
+            return;
+        }
 
         await _hub.Clients
-            .Client(connId)
-            .SendAsync("PickupOtpReceived", new
+            .Client(connectionId)
+            .PickupOtpGenerated(new OtpGeneratedDto
             {
-                trackingNumber,
-                otpCode,
-                expiresAt,
-                expiresInSeconds = Math.Max(0, (int)(expiresAt - DateTime.UtcNow).TotalSeconds)
+                OtpType        = "Pickup",
+                TrackingNumber = trackingNumber,
+                OtpCode        = otpCode,
+                ExpiresAt      = expiresAt,
             });
 
-        // Log type only — OTP code must never appear in logs (NFR5)
         _logger.LogInformation(
-            "Pickup OTP pushed to sender for shipment {Tn}", trackingNumber);
+            "TrackingService: PickupOtpGenerated → userId={UserId}, shipment={TrackingNumber}",
+            senderUserId, trackingNumber);
     }
 
-    /// <summary>
-    /// Delivery OTP → Recipient's browser tab only. Never to the group.
-    /// Silent no-op if recipient is not a registered user (id = 0)
-    /// or not currently connected.
-    /// Angular event: "DeliveryOtpReceived"
-    /// </summary>
     public async Task PushOtpToRecipientAsync(
-        string trackingNumber,
-        string otpCode,
+        int      recipientUserId,
+        string   trackingNumber,
+        string   otpCode,
         DateTime expiresAt)
     {
-        if (!_shipmentParties.TryGetValue(trackingNumber, out var parties)) return;
-        if (parties.RecipientId == 0)                                       return;
-        if (!_connections.TryGetValue(parties.RecipientId, out var connId)) return;
+        var connectionId = GetConnectionId(recipientUserId);
+
+        if (connectionId is null)
+        {
+            _logger.LogWarning(
+                "TrackingService: PushOtpToRecipientAsync — userId={UserId} not connected. " +
+                "Shipment={TrackingNumber}. SignalR push skipped.",
+                recipientUserId, trackingNumber);
+            return;
+        }
 
         await _hub.Clients
-            .Client(connId)
-            .SendAsync("DeliveryOtpReceived", new
+            .Client(connectionId)
+            .DeliveryOtpGenerated(new OtpGeneratedDto
             {
-                trackingNumber,
-                otpCode,
-                expiresAt,
-                expiresInSeconds = Math.Max(0, (int)(expiresAt - DateTime.UtcNow).TotalSeconds)
+                OtpType        = "Delivery",
+                TrackingNumber = trackingNumber,
+                OtpCode        = otpCode,
+                ExpiresAt      = expiresAt,
             });
 
-        // Log type only — OTP code must never appear in logs (NFR5)
         _logger.LogInformation(
-            "Delivery OTP pushed to recipient for shipment {Tn}", trackingNumber);
+            "TrackingService: DeliveryOtpGenerated → userId={UserId}, shipment={TrackingNumber}",
+            recipientUserId, trackingNumber);
     }
 
-    // ─────────────────────────────────────────────────────────
-    //  PRIVATE
-    // ─────────────────────────────────────────────────────────
+    // ── Helpers ──────────────────────────────────────────────────────────────
 
-    private static string Group(string trackingNumber)
+    private string? GetConnectionId(int userId)
+        => _connections.TryGetValue(userId, out var connId) ? connId : null;
+
+    private static string GroupName(string trackingNumber)
         => $"shipment-{trackingNumber}";
 }

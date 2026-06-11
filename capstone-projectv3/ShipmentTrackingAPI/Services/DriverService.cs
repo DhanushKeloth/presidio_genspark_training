@@ -65,8 +65,9 @@ public class DriverService : IDriverService
     /// </summary>
     public async Task<DriverProfileDto> UpdateOpStatusAsync(
         int userId,
-        DriverOpStatus newStatus)
+        UpdateOpStatusRequestDto request)
     {
+        var newStatus = request.NewStatus;
         var profile = await _driverRepo.GetByUserIdAsync(userId)
             ?? throw new NotFoundException(
                 "Driver profile not found for this account.");
@@ -98,6 +99,18 @@ public class DriverService : IDriverService
         }
 
         profile.OpStatus   = newStatus;
+        if (newStatus == DriverOpStatus.Available && request.CurrentLat.HasValue && request.CurrentLng.HasValue)
+        {
+            // Update location when they clock in
+            profile.CurrentLat = request.CurrentLat;
+            profile.CurrentLng = request.CurrentLng;
+        }
+        else if (newStatus == DriverOpStatus.Offline)
+        {
+            // Wipe their location when they clock out for privacy
+            profile.CurrentLat = null;
+            profile.CurrentLng = null;
+        }
         profile.UpdatedAt  = DateTime.UtcNow;
 
         await _driverRepo.UpdateAsync(profile);

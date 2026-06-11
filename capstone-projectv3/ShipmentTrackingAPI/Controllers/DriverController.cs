@@ -53,7 +53,10 @@ public class DriverController : ControllerBase
     public async Task<ActionResult<DriverProfileDto>> UpdateOperatingStatus([FromBody] UpdateOpStatusRequestDto request)
     {
         // Passes the token ID and the enum directly to your service
-        var updatedProfile = await _driverService.UpdateOpStatusAsync(GetUserId(), request.NewStatus);
-        return Ok(updatedProfile);
+       var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+    
+    var updatedProfile = await _driverService.UpdateOpStatusAsync(userId, request);
+    
+    return Ok(updatedProfile);
     }
 }

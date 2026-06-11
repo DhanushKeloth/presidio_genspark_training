@@ -1,1 +1,308 @@
-<p>register-driver works!</p>
+<div class="register-page">
+
+  <!-- LEFT PANEL -->
+
+  <div class="left-panel">
+
+    <div class="logo">
+
+      <div class="logo-icon">
+        🚚
+      </div>
+
+      <span>FastShip</span>
+
+    </div>
+
+    <div class="hero-content">
+
+      <h1>
+        Driver Network.
+      </h1>
+
+      <p>
+        Become a certified enterprise logistics partner.
+        Gain access to premium routes, real-time dispatching,
+        and secure earnings.
+      </p>
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          🚚
+        </div>
+
+        <div>
+          <h3>Flexible Deliveries</h3>
+          <p>
+            Choose your operating hours and preferred delivery zones.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          📍
+        </div>
+
+        <div>
+          <h3>Real-Time Navigation</h3>
+          <p>
+            Optimized routing directly in the FastShip platform.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="feature">
+
+        <div class="feature-icon">
+          🛡️
+        </div>
+
+        <div>
+          <h3>Secure Verification</h3>
+          <p>
+            Enterprise-grade proof of delivery protocols.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- RIGHT PANEL -->
+
+  <div class="right-panel">
+
+    <div class="register-wrapper">
+
+      <h2>Driver Registration</h2>
+
+      <p class="subtitle">
+        Complete your profile to submit for driver approval.
+      </p>
+
+      <!-- INFO BOX -->
+
+      <div class="info-box">
+
+        <strong>Admin Approval Required</strong>
+
+        <p>
+          Your driver account will remain pending until
+          reviewed and approved by an administrator.
+        </p>
+
+      </div>
+
+      <form
+        #driverForm="ngForm"
+        (ngSubmit)="onSubmit(driverForm)"
+      >
+
+        <!-- PERSONAL INFO -->
+
+        <div class="card">
+
+          <h3>👤 Personal Information</h3>
+
+          <div class="form-group">
+
+            <label>Full Name</label>
+
+            <input
+              type="text"
+              name="fullName"
+              [(ngModel)]="model.fullName"
+              required
+              placeholder="John Doe">
+
+          </div>
+
+          <div class="grid-2">
+
+            <div class="form-group">
+
+              <label>Email Address</label>
+
+              <input
+                type="email"
+                name="email"
+                [(ngModel)]="model.email"
+                required
+                placeholder="john@example.com">
+
+            </div>
+
+            <div class="form-group">
+
+              <label>Phone Number</label>
+
+              <input
+                type="tel"
+                name="phoneNumber"
+                [(ngModel)]="model.phoneNumber"
+                required
+                placeholder="+91 9876543210">
+
+            </div>
+
+          </div>
+
+          <div class="grid-2">
+
+            <div class="form-group">
+
+              <label>Password</label>
+
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                name="password"
+                [(ngModel)]="model.password"
+                required>
+
+            </div>
+
+            <div class="form-group">
+
+              <label>Confirm Password</label>
+
+              <input
+                [type]="showPassword ? 'text' : 'password'"
+                name="confirmPassword"
+                [(ngModel)]="model.confirmPassword"
+                required>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- VEHICLE DETAILS -->
+
+        <div class="card">
+
+          <h3>🚚 Vehicle Details</h3>
+
+          <div class="grid-2">
+
+            <div class="form-group">
+
+              <label>Vehicle Type</label>
+
+              <select
+                name="vehicleType"
+                [(ngModel)]="model.vehicleType"
+                required>
+
+                <option value="">
+                  Select Vehicle Type
+                </option>
+
+                <option value="Bike">Bike</option>
+                <option value="Scooter">Scooter</option>
+                <option value="Car">Car</option>
+                <option value="Van">Van</option>
+                <option value="Truck">Truck</option>
+
+              </select>
+
+            </div>
+
+            <div class="form-group">
+
+              <label>Vehicle Number</label>
+
+              <input
+                type="text"
+                name="vehicleNumber"
+                [(ngModel)]="model.vehicleNumber"
+                required
+                placeholder="KA01AB1234">
+
+            </div>
+
+          </div>
+
+          <div class="form-group">
+
+            <label>Driver License Number</label>
+
+            <input
+              type="text"
+              name="licenseNumber"
+              [(ngModel)]="model.licenseNumber"
+              required
+              placeholder="DL1234567890123">
+
+          </div>
+
+        </div>
+
+        <!-- ERROR -->
+
+        <div
+          class="error-box"
+          *ngIf="(errorMessage$ | async) as error"
+        >
+          {{ error }}
+        </div>
+
+        <!-- TERMS -->
+
+        <div class="terms-row">
+
+          <input
+            type="checkbox"
+            name="terms"
+            required
+            ngModel>
+
+          <span>
+            I agree to the
+            <a href="#">Driver Terms & Conditions</a>
+            and
+            <a href="#">Privacy Policy</a>
+          </span>
+
+        </div>
+
+        <!-- BUTTON -->
+
+        <button
+          type="submit"
+          class="register-btn"
+          [disabled]="driverForm.invalid || (isLoading$ | async)"
+        >
+
+          {{
+            (isLoading$ | async)
+              ? 'Registering...'
+              : 'Register as Driver'
+          }}
+
+        </button>
+
+      </form>
+
+      <div class="login-link">
+
+        Already have an account?
+
+        <a routerLink="/auth/login">
+          Login
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
