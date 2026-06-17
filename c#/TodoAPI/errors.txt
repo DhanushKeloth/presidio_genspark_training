@@ -1,0 +1,1 @@
+there is an existing database with table but need to update the database table with the current model when i run the migratiosn command and then update database command it says that the create table todos already exists 
