@@ -1,0 +1,421 @@
+For your **FastShip Logistics Platform**, the workflows should be organized by role. These are the exact flows I'd use for your prototype and project presentation.
+
+# 1. CUSTOMER WORKFLOW
+
+## A. New Customer Registration
+
+```text id="lcbnjk"
+Landing Page
+      ↓
+Login
+      ↓
+Register
+      ↓
+Account Type Selection
+      ↓
+Customer Registration
+      ↓
+Customer Dashboard
+```
+
+---
+
+## B. Book Shipment Workflow
+
+```text id="lq2yq7"
+Customer Dashboard
+      ↓
+Book Shipment
+      ↓
+Booking Success Modal
+      ↓
+Shipment Detail
+```
+
+### Actions
+
+* Enter pickup details
+* Enter recipient details
+* Add package information
+* Confirm booking
+
+Result:
+
+```text id="xz5mjd"
+Shipment Created
+Tracking Number Generated
+```
+
+---
+
+## C. Shipment Tracking Workflow
+
+### Method 1
+
+```text id="vtt1nl"
+Customer Dashboard
+      ↓
+My Shipments
+      ↓
+Shipment Detail
+      ↓
+Live Tracking
+```
+
+### Method 2
+
+```text id="zn2q2w"
+Customer Dashboard
+      ↓
+Track Shipment
+      ↓
+Enter Tracking Number
+      ↓
+Live Tracking
+```
+
+---
+
+## D. Pickup Verification Workflow
+
+```text id="jh3llh"
+Shipment Detail
+      ↓
+Driver Arrives
+      ↓
+Pickup OTP Screen
+      ↓
+Driver Verifies OTP
+      ↓
+Shipment Status = Picked Up
+```
+
+---
+
+## E. Delivery Verification Workflow
+
+```text id="oc4s5e"
+Live Tracking
+      ↓
+Driver Arrives
+      ↓
+Delivery OTP Screen
+      ↓
+Driver Verifies OTP
+      ↓
+Shipment Delivered
+```
+
+---
+
+## F. Profile Management Workflow
+
+```text id="6gqq0y"
+Dashboard
+      ↓
+Profile
+      ↓
+Edit Profile
+      ↓
+Save Changes
+```
+
+---
+
+# CUSTOMER PROTOTYPE FLOW
+
+```text id="s8m0ht"
+Login
+ ↓
+Customer Dashboard
+ ├── Book Shipment
+ │      ↓
+ │   Success Modal
+ │      ↓
+ │ Shipment Detail
+ │
+ ├── My Shipments
+ │      ↓
+ │ Shipment Detail
+ │      ↓
+ │ Live Tracking
+ │
+ ├── Track Shipment
+ │      ↓
+ │ Live Tracking
+ │
+ ├── Notifications
+ │
+ └── Profile
+```
+
+---
+
+# 2. DRIVER WORKFLOW
+
+## A. Driver Registration
+
+```text id="lswzrq"
+Landing Page
+      ↓
+Login
+      ↓
+Register
+      ↓
+Account Type Selection
+      ↓
+Driver Registration
+      ↓
+Approval Pending Screen
+```
+
+---
+
+## B. Admin Approval
+
+```text id="spj9ea"
+Approval Pending
+      ↓
+Admin Approves Driver
+      ↓
+Driver Dashboard Access Granted
+```
+
+---
+
+## C. Accept Delivery Workflow
+
+```text id="m5wpdo"
+Driver Dashboard
+      ↓
+Job Queue
+      ↓
+Shipment Assignment Detail
+      ↓
+Accept Shipment
+      ↓
+Active Deliveries
+```
+
+---
+
+## D. Pickup Workflow
+
+```text id="9jaf2r"
+Active Delivery
+      ↓
+Navigate To Pickup
+      ↓
+Request Pickup OTP
+      ↓
+Pickup OTP Verification
+      ↓
+Package Collected
+```
+
+---
+
+## E. Delivery Workflow
+
+```text id="mwvft7"
+Transit Navigation
+      ↓
+Arrive At Destination
+      ↓
+Request Delivery OTP
+      ↓
+Delivery OTP Verification
+      ↓
+Delivery Success
+```
+
+---
+
+## F. Delivery History Workflow
+
+```text id="yxkl11"
+Driver Dashboard
+      ↓
+Delivery History
+      ↓
+Delivery Detail
+```
+
+---
+
+# DRIVER PROTOTYPE FLOW
+
+```text id="cpxkr5"
+Login
+ ↓
+Driver Dashboard
+ ├── Job Queue
+ │      ↓
+ │ Shipment Detail
+ │      ↓
+ │ Accept Shipment
+ │
+ ├── Active Deliveries
+ │      ↓
+ │ Pickup OTP Verification
+ │      ↓
+ │ Live Navigation
+ │      ↓
+ │ Delivery OTP Verification
+ │      ↓
+ │ Delivery Success
+ │
+ ├── Delivery History
+ │
+ └── Profile
+```
+
+---
+
+# 3. ADMIN WORKFLOW
+
+## A. Platform Monitoring
+
+```text id="gllhzr"
+Login
+      ↓
+Admin Dashboard
+```
+
+Dashboard shows:
+
+* Drivers
+* Shipments
+* Deliveries
+* Analytics
+
+---
+
+## B. Driver Approval Workflow
+
+```text id="2a4tp0"
+Admin Dashboard
+      ↓
+Driver Management
+      ↓
+Driver Detail
+      ↓
+Approve Driver
+```
+
+Result:
+
+```text id="n1ppd8"
+Driver Activated
+```
+
+---
+
+## C. Shipment Monitoring Workflow
+
+```text id="c1c03o"
+Admin Dashboard
+      ↓
+Shipment Monitoring
+      ↓
+Shipment Detail
+```
+
+Admin can view:
+
+* Sender
+* Recipient
+* Driver
+* Timeline
+* GPS History
+
+---
+
+## D. Shipment Override Workflow
+
+```text id="t5m3x4"
+Shipment Detail
+      ↓
+Override Status
+      ↓
+Reason
+      ↓
+Save
+```
+
+---
+
+## E. Analytics Workflow
+
+```text id="0wjlwm"
+Admin Dashboard
+      ↓
+Analytics
+      ↓
+Reports
+```
+
+---
+
+# ADMIN PROTOTYPE FLOW
+
+```text id="uy0k1h"
+Login
+ ↓
+Admin Dashboard
+ ├── Driver Management
+ │      ↓
+ │ Driver Detail
+ │      ↓
+ │ Approve Driver
+ │
+ ├── Shipment Monitoring
+ │      ↓
+ │ Shipment Detail
+ │      ↓
+ │ Status Override
+ │
+ ├── Analytics
+ │
+ └── Activity Logs
+```
+
+---
+
+# COMPLETE APPLICATION FLOW
+
+```text id="pfh6s4"
+                LOGIN
+                   │
+    ┌──────────────┼──────────────┐
+    │              │              │
+    ▼              ▼              ▼
+
+ CUSTOMER      DRIVER         ADMIN
+    │              │              │
+    ▼              ▼              ▼
+
+ Dashboard   Dashboard    Dashboard
+
+ Customer Flow:
+ Dashboard
+ → Book Shipment
+ → Shipment Detail
+ → Live Tracking
+ → OTP Verification
+
+ Driver Flow:
+ Dashboard
+ → Job Queue
+ → Active Delivery
+ → Navigation
+ → OTP Verification
+ → Delivery Success
+
+ Admin Flow:
+ Dashboard
+ → Driver Approval
+ → Shipment Monitoring
+ → Analytics
+```
+

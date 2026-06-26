@@ -20,11 +20,12 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  // --- PURE API CALLS ---
+  
 
   public loginApiCall(credentials: LoginModel) {
     let url = environment.baseUrl + '/Auth/login';
     return this.http.post<AuthResponseModel>(url, credentials);
+    
   }
 
   public registerCustomerApiCall(data: RegisterCustomerModel) {

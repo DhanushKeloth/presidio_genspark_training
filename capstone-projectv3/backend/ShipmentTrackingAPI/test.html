@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+  <head>
+    <title>SignalR Test</title>
+  </head>
+  <body>
+    <h3>SwiftParcel Live Tracker</h3>
+    <div id="status" style="color: orange">Connecting...</div>
+    <div
+      id="log"
+      style="
+        font-family: monospace;
+        font-size: 13px;
+        white-space: pre-wrap;
+        background: #1e1e1e;
+        color: #d4d4d4;
+        padding: 16px;
+        height: 500px;
+        overflow-y: auto;
+        margin-top: 10px;
+      "
+    ></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script>
+      // ── EDIT THESE TWO LINES ──────────────────────────────
+      const JWT = prompt("enter the jwt token");
+      const TRK = prompt("enter the tracking number");
+      // ──────────────────────────────────────────────────────
+
+      const HUB = "http://localhost:5155/hubs/tracking";
+
+      function log(msg) {
+        const el = document.getElementById("log");
+        const time = new Date().toLocaleTimeString();
+        el.textContent += `[${time}] ${msg}\n\n`;
+        el.scrollTop = el.scrollHeight;
+      }
+
+      function setStatus(msg, color) {
+        const el = document.getElementById("status");
+        el.textContent = msg;
+        el.style.color = color;
+      }
+
+      const connection = new signalR.HubConnectionBuilder()
+        .withUrl(HUB, { accessTokenFactory: () => JWT })
+        .withAutomaticReconnect([0, 2000, 5000, 10000])
+        .configureLogging(signalR.LogLevel.Information)
+        .build();
+
+      // ── All events ────────────────────────────────────────
+      connection.on("StatusUpdated", (dto) => {
+        log("✅ StatusUpdated:\n" + JSON.stringify(dto, null, 2));
+      });
+
+      connection.on("LocationUpdated", (dto) => {
+        log(
+          "📍 LocationUpdated: lat=" + dto.latitude + " lng=" + dto.longitude,
+        );
+      });
+
+      connection.on("DriverArrived", (dto) => {
+        log("🚗 DriverArrived:\n" + JSON.stringify(dto, null, 2));
+      });
+
+      connection.on("ShipmentDelivered", (dto) => {
+        log("🎉 ShipmentDelivered:\n" + JSON.stringify(dto, null, 2));
+      });
+
+      connection.on("PickupOtpGenerated", (dto) => {
+        log(
+          "🔑 PICKUP OTP: " + dto.otpCode + " (expires: " + dto.expiresAt + ")",
+        );
+      });
+
+      connection.on("DeliveryOtpGenerated", (dto) => {
+        log(
+          "🔑 DELIVERY OTP: " +
+            dto.otpCode +
+            " (expires: " +
+            dto.expiresAt +
+            ")",
+        );
+      });
+
+      connection.on("OtpRegenerated", (dto) => {
+        log("🔄 OtpRegenerated: type=" + dto.otpType);
+      });
+
+      // ── Reconnect handlers ────────────────────────────────
+      connection.onreconnecting(() => {
+        setStatus("Reconnecting...", "orange");
+        log("⚠️ Connection lost — reconnecting...");
+      });
+
+      connection.onreconnected(() => {
+        setStatus("Connected ✅", "lime");
+        log("✅ Reconnected — rejoining group...");
+        connection
+          .invoke("JoinShipmentGroup", TRK)
+          .then(() => log("✅ Re-joined group: " + TRK));
+      });
+
+      connection.onclose((err) => {
+        setStatus("Disconnected ❌", "red");
+        log("❌ Connection closed: " + (err || "clean"));
+      });
+
+      // ── Start ─────────────────────────────────────────────
+      connection
+        .start()
+        .then(() => {
+          setStatus("Connected ✅", "lime");
+          log("✅ Connected to hub successfully");
+          return connection.invoke("JoinShipmentGroup", TRK);
+        })
+        .then(() => {
+          log("✅ Joined group: shipment-" + TRK);
+          log(
+            "👀 Watching for events...\n   Now go to Swagger and trigger actions with Driver JWT.",
+          );
+        })
+        .catch((err) => {
+          setStatus("Failed ❌", "red");
+          log("❌ Connection failed:\n" + err.toString());
+        });
+    </script>
+  </body>
+</html>

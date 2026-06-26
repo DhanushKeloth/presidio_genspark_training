@@ -1,0 +1,49 @@
+<div class="navbar">
+
+  <!-- Left -->
+  <div class="navbar-left">
+
+    <div class="brand">
+      <div class="brand-icon">
+        <mat-icon>local_shipping</mat-icon>
+      </div>
+
+      <div class="brand-text">
+        <h2>FastShip</h2>
+        <p>Customer Portal</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Center -->
+  <div class="navbar-center">
+    <div class="search-box">
+      <mat-icon>search</mat-icon>
+      <input type="text" placeholder="Search shipments..." />
+    </div>
+  </div>
+
+  <!-- Right -->
+  <div class="navbar-right">
+
+    <button class="notification-btn">
+      <mat-icon>notifications_none</mat-icon>
+    </button>
+
+    <div class="user-profile">
+      <div class="avatar">
+        {{ userName.charAt(0) }}
+      </div>
+
+      <div class="user-info">
+        <h4>{{ userName }}</h4>
+        <p>Customer</p>
+      </div>
+
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </div>
+
+  </div>
+
+</div>

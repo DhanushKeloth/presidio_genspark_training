@@ -1,0 +1,213 @@
+<div class="review-page">
+  <!-- Header -->
+  <div class="review-header">
+    <div>
+      <h1>Book a Shipment</h1>
+      <p>Review your shipment details before confirming</p>
+    </div>
+
+    <div class="stepper">
+      <div class="step completed">1</div>
+      <div class="line"></div>
+      <div class="step active">2</div>
+      <div class="line"></div>
+      <div class="step">3</div>
+    </div>
+  </div>
+
+  <!-- Alert Banner -->
+  <div class="alert-banner">
+    <div class="alert-left">
+      <span>ℹ</span>
+      <div>
+        <h4>Please review all details carefully</h4>
+        <p>Once confirmed, your shipment will be created and you will receive a tracking number.</p>
+      </div>
+    </div>
+
+    <button (click)="editSection('pickup')">Edit Details</button>
+  </div>
+
+  <!-- Main Grid -->
+  <div class="review-grid">
+    <!-- LEFT SECTION -->
+    <div class="left-section">
+      <!-- Pickup -->
+      <div class="info-card">
+        <div class="card-header">
+          <h3>Pickup Address</h3>
+          <button (click)="editSection('pickup')">Edit</button>
+        </div>
+
+        <p>{{ shipment.pickupAddress }}</p>
+
+        <div class="coords">
+          <span>Latitude: {{ shipment.pickupLat }}</span>
+          <span>Longitude: {{ shipment.pickupLng }}</span>
+        </div>
+      </div>
+
+      <!-- Dropoff -->
+      <div class="info-card">
+        <div class="card-header">
+          <h3>Drop-off Address</h3>
+          <button (click)="editSection('dropoff')">Edit</button>
+        </div>
+
+        <p>{{ shipment.dropoffAddress }}</p>
+
+        <div class="coords">
+          <span>Latitude: {{ shipment.dropoffLat }}</span>
+          <span>Longitude: {{ shipment.dropoffLng }}</span>
+        </div>
+      </div>
+
+      <!-- Recipient -->
+      <div class="info-card">
+        <div class="card-header">
+          <h3>Recipient Details</h3>
+          <button (click)="editSection('recipient')">Edit</button>
+        </div>
+
+        <p>{{ shipment.recipientName }}</p>
+        <p>{{ shipment.recipientPhone }}</p>
+      </div>
+
+      <!-- Additional Instructions -->
+      <div class="info-card">
+        <div class="card-header">
+          <h3>Additional Instructions</h3>
+          <button (click)="editSection('instructions')">Edit</button>
+        </div>
+
+        <p>Handle with care, call before delivery.</p>
+      </div>
+
+      <!-- Bottom Summary -->
+      <div class="bottom-summary">
+        <div class="summary-box">
+          <h4>Estimated Delivery</h4>
+          <p>2 Days</p>
+        </div>
+
+        <div class="summary-box">
+          <h4>Distance</h4>
+          <p>626 km</p>
+        </div>
+
+        <div class="summary-box">
+          <h4>Estimated Price</h4>
+          <p>₹1,250.00</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SECTION -->
+    <div class="right-section">
+      <!-- Shipment Items -->
+      <div class="shipment-items-card">
+        <div class="card-header">
+          <h3>Shipment Items ({{ shipment.items.length }})</h3>
+          <button (click)="editSection('items')">Edit Items</button>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Item Details</th>
+              <th>Weight</th>
+              <th>Qty</th>
+              <th>Dimensions</th>
+              <th>Total Weight</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (item of shipment.items; track $index) {
+              <tr>
+                <td>{{ item.description }}</td>
+                <td>{{ item.weight }} kg</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.length }} × {{ item.width }} × {{ item.height }}</td>
+                <td>{{ getItemTotalWeight(item.weight, item.quantity) }} kg</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+        <!-- Items Summary -->
+        <div class="items-summary">
+          <div>
+            Total Items
+            <span>{{ totalItems }}</span>
+          </div>
+
+          <div>
+            Total Quantity
+            <span>
+              {{ totalQuantity }}
+            </span>
+          </div>
+
+          <div>
+            Total Weight
+            <span> {{ totalWeight }} kg </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment Summary -->
+      @if (quote) {
+        <div class="payment-card">
+          <div class="payment-title">
+            <div class="payment-icon">
+              <mat-icon>account_balance_wallet</mat-icon>
+            </div>
+
+            <h3>Payment Summary</h3>
+          </div>
+
+          <div class="payment-row">
+            <span>Base Rate</span>
+            <span>₹{{ quote.baseRate }}</span>
+          </div>
+
+          <div class="payment-row">
+            <span>Distance Charge</span>
+            <span>₹{{ quote.distanceCharge }}</span>
+          </div>
+
+          <div class="payment-row">
+            <span>Weight Surcharge</span>
+            <span>₹{{ quote.weightSurcharge }}</span>
+          </div>
+
+          <div class="payment-row">
+            <span>Platform Fee</span>
+            <span>₹{{ quote.platformFee }}</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="payment-row total-row">
+            <span>Total Amount</span>
+            <span class="total-amount">₹{{ quote.estimatedCost }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Footer Actions -->
+  <div class="footer-actions">
+    <button class="back-btn" (click)="editSection('pickup')">Back to Edit</button>
+
+    <button class="confirm-btn" (click)="confirmShipment()">Confirm & Book Shipment</button>
+  </div>
+
+  <!-- Security Banner -->
+  <div class="secure-banner">
+    <h4>Secure & Reliable</h4>
+    <p>Your shipment is protected. Real-time tracking and OTP verification for every delivery.</p>
+  </div>
+</div>

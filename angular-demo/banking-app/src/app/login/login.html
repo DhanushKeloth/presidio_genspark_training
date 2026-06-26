@@ -1,0 +1,24 @@
+<section>
+    <h1>Login</h1>
+    <!-- <form (submit)="handleLoginClick()"> -->
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" [(ngModel)]="loginModel().username" name="username" required minlength="3" #username="ngModel">
+            @if ((username.dirty||username.touched) && username.invalid ) {
+                <div>
+                    @if (username.errors?.['required']) {
+                        <span>Username is required</span>
+                    }
+                    @if (username.errors?.['minlength']) {
+                        <span>Username should be of min 3 length</span>
+                    }
+                </div>
+            }
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" [(ngModel)]="loginModel().password" name="password" required>
+        </div>
+        <button type="submit" (click)="handleLoginClick()">Login</button>
+    <!-- </form> -->
+</section>

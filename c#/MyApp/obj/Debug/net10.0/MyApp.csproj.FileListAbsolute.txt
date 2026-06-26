@@ -1,0 +1,15 @@
+/Users/dhanushkeloth/presidio_genspark_training/c#/MyApp/bin/Debug/net10.0/MyApp
+/Users/dhanushkeloth/presidio_genspark_training/c#/MyApp/bin/Debug/net10.0/MyApp.deps.json
+/Users/dhanushkeloth/presidio_genspark_training/c#/MyApp/bin/Debug/net10.0/MyApp.runtimeconfig.json
+/Users/dhanushkeloth/presidio_genspark_training/c#/MyApp/bin/Debug/net10.0/MyApp.dll
+/Users/dhanushkeloth/presidio_genspark_training/c#/MyApp/bin/Debug/net10.0/MyApp.pdb
+/Users/dhanushkeloth/presidio_genspark_training/c#/MyApp/obj/Debug/net10.0/MyApp.GeneratedMSBuildEditorConfig.editorconfig
+/Users/dhanushkeloth/presidio_genspark_training/c#/MyApp/obj/Debug/net10.0/MyApp.AssemblyInfoInputs.cache
+/Users/dhanushkeloth/presidio_genspark_training/c#/MyApp/obj/Debug/net10.0/MyApp.AssemblyInfo.cs
+/Users/dhanushkeloth/presidio_genspark_training/c#/MyApp/obj/Debug/net10.0/MyApp.csproj.CoreCompileInputs.cache
+/Users/dhanushkeloth/presidio_genspark_training/c#/MyApp/obj/Debug/net10.0/MyApp.sourcelink.json
+/Users/dhanushkeloth/presidio_genspark_training/c#/MyApp/obj/Debug/net10.0/MyApp.dll
+/Users/dhanushkeloth/presidio_genspark_training/c#/MyApp/obj/Debug/net10.0/refint/MyApp.dll
+/Users/dhanushkeloth/presidio_genspark_training/c#/MyApp/obj/Debug/net10.0/MyApp.pdb
+/Users/dhanushkeloth/presidio_genspark_training/c#/MyApp/obj/Debug/net10.0/MyApp.genruntimeconfig.cache
+/Users/dhanushkeloth/presidio_genspark_training/c#/MyApp/obj/Debug/net10.0/ref/MyApp.dll

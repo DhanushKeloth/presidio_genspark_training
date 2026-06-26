@@ -1,0 +1,264 @@
+<div class="book-page">
+  <!-- Header -->
+  <div class="book-header">
+    <div>
+      <h1>Book a Shipment</h1>
+      <p>Fill in the details below to book a new shipment</p>
+    </div>
+
+    <div class="stepper">
+      <div class="step active">1</div>
+      <div class="line"></div>
+      <div class="step">2</div>
+      <div class="line"></div>
+      <div class="step">3</div>
+    </div>
+  </div>
+
+  <div class="book-grid">
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <!-- Pickup -->
+      <div class="form-card" id="pickup">
+        <div class="card-header">
+          <div class="title">
+            <mat-icon class="green">location_on</mat-icon>
+            <h3>Pickup Address</h3>
+          </div>
+
+          <button type="button">Use My Location</button>
+        </div>
+
+        <input
+          type="text"
+          placeholder="Pickup Address"
+          [(ngModel)]="shipmentData().pickupAddress"
+          name="pickupAddress"
+        />
+
+        <div class="row">
+          <input
+            type="number"
+            placeholder="Latitude"
+            [(ngModel)]="shipmentData().pickupLat"
+            name="pickupLat"
+          />
+
+          <input
+            type="number"
+            placeholder="Longitude"
+            [(ngModel)]="shipmentData().pickupLng"
+            name="pickupLng"
+          />
+        </div>
+      </div>
+
+      <!-- Dropoff -->
+      <div class="form-card" id="dropoff">
+        <div class="card-header">
+          <div class="title">
+            <mat-icon class="red">location_on</mat-icon>
+            <h3>Drop-off Address</h3>
+          </div>
+
+          <button type="button">Use My Location</button>
+        </div>
+
+        <input
+          type="text"
+          placeholder="Drop-off Address"
+          [(ngModel)]="shipmentData().dropoffAddress"
+          name="dropoffAddress"
+        />
+
+        <div class="row">
+          <input
+            type="number"
+            placeholder="Latitude"
+            [(ngModel)]="shipmentData().dropoffLat"
+            name="dropoffLat"
+          />
+
+          <input
+            type="number"
+            placeholder="Longitude"
+            [(ngModel)]="shipmentData().dropoffLng"
+            name="dropoffLng"
+          />
+        </div>
+      </div>
+
+      <!-- Recipient -->
+      <div class="form-card" id="recipient">
+        <div class="card-header">
+          <div class="title">
+            <mat-icon class="purple">person</mat-icon>
+            <h3>Recipient Details</h3>
+          </div>
+        </div>
+
+        <input
+          type="text"
+          placeholder="Recipient Name"
+          [(ngModel)]="shipmentData().recipientName"
+          name="recipientName"
+        />
+
+        <input
+          type="text"
+          placeholder="Recipient Phone"
+          [(ngModel)]="shipmentData().recipientPhone"
+          name="recipientPhone"
+        />
+      </div>
+
+      <!-- Instructions -->
+      <div class="form-card">
+        <div class="card-header">
+          <div class="title">
+            <mat-icon class="blue">chat_bubble_outline</mat-icon>
+            <h3>Additional Instructions</h3>
+          </div>
+        </div>
+
+        <textarea placeholder="Handle with care, call before delivery..."></textarea>
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+      <div class="shipment-card" id="items">
+        <div class="card-header">
+          <div class="title">
+            <mat-icon>inventory_2</mat-icon>
+            <h3>Shipment Items</h3>
+          </div>
+
+          <button class="add-btn" type="button" (click)="addItem()">
+            <mat-icon>add</mat-icon>
+            Add Item
+          </button>
+        </div>
+
+        @for (item of shipmentData().items; track $index) {
+          <div class="item-block">
+            <div class="item-header">
+              <div class="item-number">
+                {{ $index + 1 }}
+              </div>
+
+              @if (shipmentData().items.length > 1) {
+                <button class="remove-btn" type="button" (click)="removeItem($index)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              }
+            </div>
+            <input
+              type="text"
+              placeholder="Description"
+              [(ngModel)]="item.description"
+              [name]="'description' + $index"
+            />
+
+            <div class="row">
+              <input
+                type="number"
+                placeholder="Weight (kg)"
+                [(ngModel)]="item.weight"
+                [name]="'weight' + $index"
+              />
+
+              <input
+                type="number"
+                placeholder="Quantity"
+                [(ngModel)]="item.quantity"
+                [name]="'quantity' + $index"
+              />
+            </div>
+
+            <div class="row">
+              <input
+                type="number"
+                placeholder="Height"
+                [(ngModel)]="item.height"
+                [name]="'height' + $index"
+              />
+
+              <input
+                type="number"
+                placeholder="Width"
+                [(ngModel)]="item.width"
+                [name]="'width' + $index"
+              />
+
+              <input
+                type="number"
+                placeholder="Length"
+                [(ngModel)]="item.length"
+                [name]="'length' + $index"
+              />
+            </div>
+          </div>
+        }
+
+        <!-- Summary -->
+        <div class="items-summary">
+          <div>
+            <mat-icon>inventory</mat-icon>
+            <span>Total Items</span>
+            <strong>{{ totalItems() }}</strong>
+          </div>
+
+          <div>
+            <mat-icon>format_list_numbered</mat-icon>
+            <span>Total Quantity</span>
+            <strong>{{ totalQuantity() }}</strong>
+          </div>
+
+          <div>
+            <mat-icon>scale</mat-icon>
+            <span>Total Weight</span>
+            <strong>{{ totalWeight() }} kg</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Summary -->
+  <div class="bottom-bar">
+    <div class="summary-box">
+      <mat-icon>schedule</mat-icon>
+      <div>
+        <span>Estimated Delivery</span>
+        <p>May 28, 2024 by 03:00 PM</p>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <mat-icon>route</mat-icon>
+      <div>
+        <span>Distance</span>
+        <p>626 km</p>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <mat-icon>sell</mat-icon>
+      <div>
+        <span>Estimated Price</span>
+        <p>₹1,250.00</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-actions">
+    <button class="cancel-btn" type="button">Cancel</button>
+
+    <button class="review-btn" type="button" (click)="goToReview()">
+      Review Shipment
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </div>
+</div>

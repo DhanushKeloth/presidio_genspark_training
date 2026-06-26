@@ -1,0 +1,19 @@
+.customer-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.layout-body {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  background: #f8fafc;
+  overflow-y: auto;
+  padding: 24px;
+}

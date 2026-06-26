@@ -1,0 +1,89 @@
+
+<div class="auth-container">
+
+  <!-- Left Section -->
+  <div class="left-panel">
+    <div class="brand">FastShip</div>
+
+    <div class="content">
+      <h1>Join the FastShip Network</h1>
+
+      <p>
+        Choose how you want to use FastShip and start your journey today.
+      </p>
+
+      <ul>
+        <li>✔ Real-Time Shipment Tracking</li>
+        <li>✔ Secure OTP Verification</li>
+        <li>✔ Fast & Reliable Deliveries</li>
+        <li>✔ Modern Logistics Platform</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      © 2024 FastShip Logistics Inc.
+    </div>
+  </div>
+
+  <!-- Right Section -->
+  <div class="right-panel">
+    <div class="register-wrapper">
+
+      <h2>Create Your Account</h2>
+      <p>Select your role to continue registration</p>
+
+      <div class="cards">
+
+        <!-- Customer Card -->
+        <div class="role-card">
+          <div class="icon">📦</div>
+
+          <h3>Customer</h3>
+
+          <p>
+            Book shipments, track deliveries, manage recipients,
+            and monitor parcel status in real time.
+          </p>
+
+          <ul>
+            <li>Book Instant Shipments</li>
+            <li>Digital Receipts</li>
+          </ul>
+
+          <button (click)="navigateToRegister('customer')">
+            Register as Customer
+          </button>
+        </div>
+
+        <!-- Driver Card -->
+        <div class="role-card">
+          <div class="icon">🚚</div>
+
+          <h3>Driver</h3>
+
+          <p>
+            Accept delivery jobs, navigate routes,
+            manage shipments, and earn by delivering packages.
+          </p>
+
+          <ul>
+            <li>Route Optimization</li>
+            <li>Weekly Earnings</li>
+          </ul>
+
+          <button (click)="navigateToRegister('driver')">
+            Register as Driver
+          </button>
+        </div>
+
+      </div>
+
+      <div class="signin">
+        Already have an account?
+        <span (click)="navigateToLogin()">Sign In</span>
+      </div>
+
+    </div>
+  </div>
+
+</div>

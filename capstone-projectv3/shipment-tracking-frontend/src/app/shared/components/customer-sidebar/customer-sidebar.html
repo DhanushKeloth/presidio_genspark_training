@@ -1,0 +1,35 @@
+<div class="sidebar">
+
+  <nav class="sidebar-nav">
+    @for (item of menuItems; track item.route) {
+      <a
+        [routerLink]="item.route"
+        routerLinkActive="active"
+        class="nav-item"
+      >
+        <mat-icon>{{ item.icon }}</mat-icon>
+        <span>{{ item.label }}</span>
+      </a>
+    }
+  </nav>
+
+  <div class="support-card">
+    <mat-icon>local_shipping</mat-icon>
+
+    <h4>Need help with booking?</h4>
+
+    <p>
+      Our support team is here to help you 24/7.
+    </p>
+
+    <button>Contact Support</button>
+  </div>
+
+  <div class="logout-section">
+    <button class="logout-btn">
+      <mat-icon>logout</mat-icon>
+      Logout
+    </button>
+  </div>
+
+</div>

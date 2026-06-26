@@ -1,0 +1,49 @@
+<p>register works!</p>
+<section>
+  <h1>Register</h1>
+  <form (submit)="handleRegisterClick()">
+    <div>
+      <label for="userName">Username:</label>
+      <input
+        type="text"
+        id="userName"
+        [(ngModel)]="registerModel().userName"
+        name="userName"
+        required
+      />
+    </div>
+    <div>
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" [(ngModel)]="registerModel().name" name="name" required />
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" [(ngModel)]="registerModel().email" name="email" required />
+    </div>
+    <div>
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" [(ngModel)]="registerModel().phone" name="phone" />
+    </div>
+    <div>
+      <label for="status">Status:</label>
+      <input type="text" id="status" [(ngModel)]="registerModel().status" name="status" />
+    </div>
+    <div>
+      <label for="dateOfBirth">Date of Birth:</label>
+      <input
+        type="date"
+        id="dateOfBirth"
+        [(ngModel)]="registerModel().dateOfBirth"
+        name="dateOfBirth"
+      />
+    </div>
+    <button type="submit">
+      @if (isLoading()) {
+        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        Processing...
+      } @else {
+        Register
+      }
+    </button>
+  </form>
+</section>

@@ -1,0 +1,171 @@
+.auth-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.left-panel {
+  width: 42%;
+  background: #eaf2ff;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .brand {
+    font-size: 32px;
+    font-weight: bold;
+    color: #0d47c9;
+  }
+
+  .content {
+    h1 {
+      font-size: 56px;
+      font-weight: 700;
+      color: #0d47c9;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        margin-bottom: 15px;
+        font-size: 16px;
+        color: #222;
+      }
+    }
+  }
+
+  .footer {
+    font-size: 14px;
+    color: #666;
+  }
+}
+
+.right-panel {
+  width: 58%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.register-wrapper {
+  width: 100%;
+  max-width: 850px;
+  text-align: center;
+
+  h2 {
+    font-size: 42px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #666;
+    margin-bottom: 40px;
+  }
+}
+
+.cards {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+
+.role-card {
+  width: 350px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 30px;
+  text-align: left;
+  transition: 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  }
+
+  .icon {
+    width: 60px;
+    height: 60px;
+    background: #eef4ff;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 32px;
+    margin-bottom: 15px;
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+
+  ul {
+    padding-left: 20px;
+    margin-bottom: 25px;
+
+    li {
+      margin-bottom: 10px;
+    }
+  }
+
+  button {
+    width: 100%;
+    background: #0d47c9;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    font-weight: 600;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+}
+
+.signin {
+  margin-top: 40px;
+  font-size: 15px;
+
+  span {
+    color: #0d47c9;
+    cursor: pointer;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 1024px) {
+  .auth-container {
+    flex-direction: column;
+  }
+
+  .left-panel,
+  .right-panel {
+    width: 100%;
+  }
+
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}

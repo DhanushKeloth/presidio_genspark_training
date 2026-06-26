@@ -1,0 +1,109 @@
+.sidebar {
+  width: 240px;
+  height: calc(100vh - 70px);
+  background: white;
+  border-right: 1px solid #eef2f7;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px 16px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  text-decoration: none;
+  color: #334155;
+  font-size: 15px;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.nav-item mat-icon {
+  font-size: 22px;
+}
+
+.nav-item:hover {
+  background: #f8fafc;
+}
+
+.nav-item.active {
+  background: #eef4ff;
+  color: #2563eb;
+}
+
+.support-card {
+  background: #f8fbff;
+  border-radius: 18px;
+  padding: 18px;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.support-card mat-icon {
+  font-size: 40px;
+  color: #2563eb;
+  margin-bottom: 10px;
+}
+
+.support-card h4 {
+  font-size: 15px;
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+
+.support-card p {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.support-card button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #2563eb;
+  background: white;
+  color: #2563eb;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.support-card button:hover {
+  background: #eff6ff;
+}
+
+.logout-section {
+  margin-top: 20px;
+}
+
+.logout-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  background: #f8fafc;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #f1f5f9;
+}
+
+.logout-btn mat-icon {
+  font-size: 20px;
+}

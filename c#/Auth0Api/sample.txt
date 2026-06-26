@@ -1,0 +1,21 @@
+dotnet-web-api
+
+https://api.sample-project.com
+
+AUTH0_API_NAME="dotnet-web-api" && \
+AUTH0_API_IDENTIFIER="https://api.sample-project.com" && \
+brew tap auth0/auth0-cli && \
+brew install auth0 && \
+auth0 login --no-input && \
+auth0 apis create -n "${AUTH0_API_NAME}" -i "${AUTH0_API_IDENTIFIER}" --offline-access --token-lifetime 86400 --signing-alg RS256 --json > auth0-api-details.json && \
+DOMAIN=$(auth0 tenants list --json | jq -r '.[] | select(.active == true) | .name') && \
+AUDIENCE=$(jq -r '.identifier' auth0-api-details.json) && \
+jq --arg domain "$DOMAIN" --arg audience "$AUDIENCE" \
+  '.Auth0.Domain = $domain | .Auth0.Audience = $audience' \
+  appsettings.json > appsettings.tmp.json && \
+mv appsettings.tmp.json appsettings.json && \
+rm auth0-api-details.json && \
+echo "✅ appsettings.json updated with your Auth0 API details:" && \
+cat appsettings.json
+
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkU4QzRiZ09NYnc0Z2dsa25IZzlCTSJ9.eyJpc3MiOiJodHRwczovL2Rldi1ta29uZ29jczVtNHk0emtxLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJXNzJ5V0tMbnpLTXg4Q21iTTFCa2QwendaZUZ1Q2pJUEBjbGllbnRzIiwiYXVkIjoiaHR0cHM6Ly9hcGkuc2FtcGxlLXByb2plY3QuY29tIiwiaWF0IjoxNzgwMDMwMzQwLCJleHAiOjE3ODAxMTY3NDAsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyIsImF6cCI6Ilc3MnlXS0xuektNeDhDbWJNMUJrZDB6d1plRnVDaklQIn0.WQAPGwcsro8FuMW5SN3FhXgZMtc51Z6XfCh92mRIwZwt_MGVGEIZHMG7l1ZtMyUA3RLyfP2UwY1USsCg9K8cAQS8Edy0kh8pLh6gc39Lo6WxzEb72dGQ-yE-OoT4MfewsqByXjhH44o8OF7lDUc2oUp3FT6A2-s2pjNKpFV2evRKhSdY173FTQnG2USMM-JWLQeIrUltO12FYEuWCXs36WKCNKzTwi68BbS31ko8X_V5N2fabk4QXz8nxjaF7E2NTXpRgqOKlBAsHF6zG_wyITOTCKAgp9u2PI1X2pHXYWJz5W_2lxgrgoRbPqN4qjq3hxA59HvyPeZTpWCNj8HtOA

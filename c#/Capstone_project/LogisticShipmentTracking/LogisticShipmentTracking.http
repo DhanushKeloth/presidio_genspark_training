@@ -1,0 +1,6 @@
+@LogisticShipmentTracking_HostAddress = http://localhost:5296
+
+GET {{LogisticShipmentTracking_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

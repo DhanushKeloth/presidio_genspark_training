@@ -1,0 +1,33 @@
+8. Logistics & Shipment Tracking System
+Objective:
+Develop a complete enterprise-grade application using layered architecture with
+PostgreSQL, ASP.NET Core Web API, and Angular frontend.
+Core Modules:
+• Shipment Booking
+• Tracking
+• Driver Management
+• Delivery Confirmation
+
+Key Features:
+• GPS tracking simulation
+• Push updates
+
+Suggested Architecture:
+Angular Frontend → ASP.NET Core Web API → Service Layer → Repository Layer →
+PostgreSQL Database
+Azure Integration:
+• Azure Maps
+• Azure Service Bus
+
+Student Deliverables:
+• Requirement Document
+• ER Diagram
+• API Documentation
+• Angular Screens
+• Authentication & Authorization
+• CRUD APIs
+• Search & Pagination
+• Deployment Steps
+
+Phase 2 Enhancements:
+• Kubernetes

@@ -1,0 +1,215 @@
+<div class="confirmation-page">
+
+  <!-- Header -->
+  <div class="confirmation-header">
+    <div>
+      <h1>Book a Shipment</h1>
+      <p>Your shipment has been booked successfully!</p>
+    </div>
+
+    <div class="stepper">
+      <div class="step completed">1</div>
+      <div class="line"></div>
+      <div class="step completed">2</div>
+      <div class="line"></div>
+      <div class="step active">3</div>
+    </div>
+  </div>
+
+  <!-- Success Banner -->
+  <div class="success-banner">
+    <div class="banner-left">
+      <div class="success-icon">
+        <mat-icon>check</mat-icon>
+      </div>
+
+      <div>
+        <h3>Shipment Booked Successfully!</h3>
+        <p>Your shipment has been created. You will receive updates as your package moves.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tracking Card -->
+  <div class="tracking-card">
+
+    <div class="tracking-left">
+      <div class="package-icon">
+        <mat-icon>inventory_2</mat-icon>
+      </div>
+
+      <div class="tracking-info">
+        <h4>Your Tracking Number</h4>
+
+        <div class="tracking-row">
+          <h2>{{ trackingNumber }}</h2>
+
+          <button class="copy-btn" (click)="copyTrackingNumber()">
+            <mat-icon>content_copy</mat-icon>
+          </button>
+        </div>
+
+        <p>May 22, 2024 at 10:24 AM</p>
+      </div>
+    </div>
+
+    <div class="tracking-divider"></div>
+
+    <div class="tracking-right">
+      <div class="qr-box">
+        QR
+      </div>
+
+      <div>
+        <h4>Scan to Track</h4>
+        <p>Scan this QR code to track your shipment</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Shipment Summary -->
+  <div class="summary-card">
+
+    <div class="summary-header">
+      <h2>Shipment Summary</h2>
+      <button>Expand Details</button>
+    </div>
+
+    <div class="summary-grid">
+
+      <!-- Pickup -->
+      <div class="summary-block">
+        <div class="summary-title">
+          <mat-icon class="green">location_on</mat-icon>
+          Pickup Address
+        </div>
+
+        <p>123 Tech Park, Madhapur, Hyderabad, TS 500081</p>
+        <span>Lat: 17.4483, Lng: 78.3915</span>
+      </div>
+
+      <!-- Recipient -->
+      <div class="summary-block">
+        <div class="summary-title">
+          <mat-icon class="purple">person</mat-icon>
+          Recipient Details
+        </div>
+
+        <p>Rahul Sharma</p>
+        <p>+919876543210</p>
+      </div>
+
+      <!-- Items -->
+      <div class="summary-block items-box">
+        <div class="summary-title">
+          <mat-icon>inventory_2</mat-icon>
+          Shipment Items (2)
+        </div>
+
+        <div class="mini-item">
+          <span>Dell XPS 15 Laptop in Box</span>
+          <span>Qty: 1 • 2.5kg</span>
+        </div>
+
+        <div class="mini-item">
+          <span>Signed Legal Documents</span>
+          <span>Qty: 2 • 0.5kg</span>
+        </div>
+
+        <div class="item-footer">
+          <div>Total Quantity <strong>3</strong></div>
+          <div>Total Weight <strong>3.0 kg</strong></div>
+        </div>
+      </div>
+
+      <!-- Dropoff -->
+      <div class="summary-block">
+        <div class="summary-title">
+          <mat-icon class="red">location_on</mat-icon>
+          Drop-off Address
+        </div>
+
+        <p>456 Office Tower, Koramangala, Bengaluru, KA 560034</p>
+        <span>Lat: 12.9352, Lng: 77.6245</span>
+      </div>
+
+      <!-- Delivery -->
+      <div class="summary-block">
+        <div class="summary-title">
+          <mat-icon class="blue">local_shipping</mat-icon>
+          Estimated Delivery
+        </div>
+
+        <p>May 28, 2024 by 03:00 PM</p>
+
+        <div class="status-pill">
+          In Transit
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- What's Next -->
+  <div class="next-card">
+
+    <h2>What's Next?</h2>
+
+    <div class="next-grid">
+
+      <div class="next-step">
+        <mat-icon>assignment</mat-icon>
+        <h4>1. Looking for Driver</h4>
+        <p>We are finding the best driver for your shipment.</p>
+      </div>
+
+      <div class="next-step">
+        <mat-icon>local_shipping</mat-icon>
+        <h4>2. Pickup Scheduled</h4>
+        <p>You will receive pickup OTP once driver is assigned.</p>
+      </div>
+
+      <div class="next-step">
+        <mat-icon>inventory_2</mat-icon>
+        <h4>3. In Transit</h4>
+        <p>Track your shipment in real-time as it moves to destination.</p>
+      </div>
+
+      <div class="next-step">
+        <mat-icon>check_circle</mat-icon>
+        <h4>4. Delivered</h4>
+        <p>You will receive delivery OTP before final delivery.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-actions">
+
+    <button class="secondary-btn">
+      View All Shipments
+    </button>
+
+    <div class="right-buttons">
+      <button class="secondary-btn">
+        <mat-icon>share</mat-icon>
+        Share Tracking
+      </button>
+
+      <button class="primary-btn">
+        Track Shipment
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+      <button class="cancel-btn">
+        Cancel Shipment
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+      
+    </div>
+
+  </div>
+
+</div>

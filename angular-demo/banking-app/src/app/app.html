@@ -1,0 +1,24 @@
+<h1 align="center">Hello World!!</h1>
+<hr/>
+<!-- <app-register></app-register>
+<hr/>
+<app-login></app-login>
+<hr/>
+<app-products></app-products>
+<hr/>
+<app-customers></app-customers>
+<app-parent></app-parent> -->
+
+<app-navbar-component></app-navbar-component>
+<div class="container mt-4 position-relative">
+  
+  @if (isLoading) {
+    <div class="d-flex justify-content-center align-items-center my-5">
+      <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <h4 class="ms-3 text-primary mb-0">Loading page...</h4>
+    </div>
+  }
+<router-outlet></router-outlet>
+</div>

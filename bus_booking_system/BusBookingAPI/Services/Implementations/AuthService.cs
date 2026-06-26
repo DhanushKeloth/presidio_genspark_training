@@ -59,7 +59,8 @@ public class AuthService : IAuthService
             Token = token,
             ExpiresAt = _jwt.GetExpiry(),
             Role = "User",
-            Email = user.Email
+            Email = user.Email,
+            Name = user.FullName
         }, "Login successful", 200);
     }
 
@@ -103,7 +104,8 @@ public class AuthService : IAuthService
             Token = token,
             ExpiresAt = _jwt.GetExpiry(),
             Role = "Operator",
-            Email = op.Email
+            Email = op.Email,
+            Name = op.CompanyName
         }, "Login successful", 200);
     }
 
@@ -123,7 +125,8 @@ public class AuthService : IAuthService
             Token = token,
             ExpiresAt = _jwt.GetExpiry(),
             Role = "Admin",
-            Email = admin.Email
+            Email = admin.Email,
+            Name = admin.Email
         }, "Login successful", 200);
     }
 }
