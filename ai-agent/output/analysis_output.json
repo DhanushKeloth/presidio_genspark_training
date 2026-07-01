@@ -1,0 +1,42 @@
+{
+  "functional_requirements": [
+    "Customer can browse restaurants",
+    "Customer can view menus",
+    "Customer can place orders",
+    "Customer can track delivery in real-time",
+    "Restaurant owners can manage their menu",
+    "Restaurant owners can view incoming orders",
+    "Restaurant owners can update order status",
+    "Delivery agents can receive order assignments",
+    "Delivery agents can update delivery status via a mobile app",
+    "Support for UPI, credit/debit cards, and cash on delivery",
+    "Availability on Android, iOS, and web"
+  ],
+  "non_functional_requirements": [
+    "Security",
+    "Performance",
+    "Scalability",
+    "Reliability",
+    "Minimal downtime"
+  ],
+  "risks": [
+    "Meeting the 4-month deadline",
+    "Staying within the budget of 15 lakhs INR",
+    "Handling the expected scale of 1 lakh users within 6 months",
+    "Ensuring the security of the system",
+    "Managing the complexity of multiple payment options"
+  ],
+  "assumptions": [
+    "The client has the necessary infrastructure to support the system",
+    "The client has a clear understanding of the target audience and market",
+    "The client has a plan for marketing and promoting the platform",
+    "The development team will have access to the necessary resources and expertise"
+  ],
+  "questions_to_client": [
+    "Can you provide more information about the target audience and market?",
+    "What is the expected average order value and frequency of orders?",
+    "How will the restaurant owners and delivery agents be onboarded and trained?",
+    "What is the plan for handling customer support and feedback?",
+    "Are there any specific technology or infrastructure requirements or preferences?"
+  ]
+}

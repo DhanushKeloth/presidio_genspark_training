@@ -1,0 +1,23 @@
+From: client@techcorp.com
+Subject: Project Requirements - Online Food Delivery Platform
+
+Hi Team,
+
+We need to build an online food delivery platform similar to Swiggy/Zomato for our city.
+
+The system should allow customers to browse restaurants, view menus, place orders, and track delivery in real-time.
+Restaurant owners should be able to manage their menu, view incoming orders, and update order status.
+Delivery agents should receive order assignments and update delivery status via a mobile app.
+
+We want the app to be available on both Android and iOS, along with a web version.
+Payment should support UPI, credit/debit cards, and cash on delivery.
+We expect around 10,000 users at launch, scaling to 1 lakh users within 6 months.
+
+We want the system to go live in 4 months. Our budget is around 15 lakhs INR.
+The system must be secure, fast, and reliable. Downtime should be minimal.
+
+Let us know what you need to get started.
+
+Regards,
+Rajesh Kumar
+CTO, TechCorp Pvt. Ltd.
